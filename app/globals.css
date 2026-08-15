@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+:root {
+  --background: #08090b;
+  --background-elevated: #101113;
+  --foreground: #f5f5f2;
+  --muted: #96959c;
+  --muted-dim: #5f5e66;
+  --accent: #ff7a33;
+  --accent-soft: #ff7a3326;
+  --accent-dim: #ff7a331a;
+  --border-soft: #ffffff14;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-background-elevated: var(--background-elevated);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-dim: var(--muted-dim);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-dim: var(--accent-dim);
+  --color-border-soft: var(--border-soft);
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body), Arial, Helvetica, sans-serif;
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display), var(--font-body), sans-serif;
+  }
+
+  .bg-grid-pattern {
+    background-image:
+      linear-gradient(to right, var(--border-soft) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--border-soft) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+
+  .bg-dot-pattern {
+    background-image: radial-gradient(var(--border-soft) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(2%, -3%, 0) scale(1.05);
+  }
+}
+
+.animate-drift {
+  animation: drift 18s ease-in-out infinite;
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 7s linear infinite;
+}
+
+::selection {
+  background: var(--accent);
+  color: #0a0a0a;
+}
