@@ -4,7 +4,7 @@ export function BackgroundFx() {
       aria-hidden
       className="pointer-events-none fixed inset-0 -z-10 overflow-hidden bg-background"
     >
-      <div className="absolute inset-0 bg-dot-pattern opacity-[0.35] [mask-image:radial-gradient(ellipse_80%_60%_at_50%_0%,black,transparent)]" />
+      <div className="bg-blueprint-grid absolute inset-0 opacity-30" />
 
       <div className="animate-drift absolute -top-40 right-[-10%] h-[42rem] w-[42rem] rounded-full bg-accent/20 blur-[140px]" />
       <div

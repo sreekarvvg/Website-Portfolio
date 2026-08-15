@@ -1,42 +1,73 @@
 import type { Milestone } from "@/lib/milestones";
 
+const PLATE_CORNERS = [
+  "top-1.5 left-1.5 border-t border-l",
+  "top-1.5 right-1.5 border-t border-r",
+  "bottom-1.5 left-1.5 border-b border-l",
+  "bottom-1.5 right-1.5 border-b border-r",
+];
+
 export function MilestoneDetail({ milestone }: { milestone: Milestone }) {
+  const Icon = milestone.icon;
+
   return (
-    <div className="grid grid-cols-1 gap-10 p-6 sm:p-10 lg:grid-cols-[1.3fr_1fr] lg:gap-16">
-      <div>
-        <p className="font-mono text-xs tracking-[0.3em] text-accent uppercase">
-          {milestone.index} — {milestone.period}
-        </p>
-        <h3 className="font-display mt-3 text-3xl font-semibold text-white sm:text-4xl">
+    <div className="relative grid grid-cols-1 gap-10 overflow-hidden px-6 py-10 sm:px-10 lg:grid-cols-[1.2fr_1fr] lg:gap-16">
+      <span
+        aria-hidden
+        className="font-display pointer-events-none absolute -top-8 -right-2 text-[9rem] leading-none font-medium text-white/[0.03] select-none"
+      >
+        {milestone.index}
+      </span>
+
+      <div className="relative">
+        <div className="flex items-center gap-3">
+          <Icon className="h-4 w-4 text-accent" strokeWidth={1.5} />
+          <p className="font-mono text-xs tracking-[0.3em] text-accent uppercase">
+            {milestone.index} — {milestone.period}
+          </p>
+        </div>
+        <h3 className="font-display mt-4 text-3xl font-medium text-white sm:text-4xl">
           {milestone.title}
         </h3>
-        <p className="mt-5 max-w-xl text-balance leading-relaxed text-muted">
+        <p className="text-balance mt-5 max-w-xl leading-relaxed text-muted">
           {milestone.description}
         </p>
 
-        <div className="mt-8 flex flex-wrap gap-2">
-          {milestone.skills.map((skill) => (
-            <span
+        <dl className="mt-8 flex flex-wrap gap-x-8 gap-y-3 border-t border-border-fine pt-6">
+          <dt className="sr-only">Skills</dt>
+          {milestone.skills.map((skill, i) => (
+            <dd
               key={skill}
-              className="rounded-full border border-border-soft bg-white/[0.02] px-3 py-1 text-xs text-foreground/80"
+              className="flex items-center gap-2 font-mono text-[11px] tracking-[0.15em] text-foreground/75 uppercase"
             >
+              <span className="text-muted-dim">
+                {String(i + 1).padStart(2, "0")}
+              </span>
               {skill}
-            </span>
+            </dd>
           ))}
-        </div>
+        </dl>
       </div>
 
-      <div>
+      <div className="relative">
         <p className="font-mono text-xs tracking-[0.3em] text-muted uppercase">
-          Proof &amp; Artifacts
+          Artifacts
         </p>
         <div className="mt-4 grid grid-cols-2 gap-3">
           {[0, 1, 2, 3].map((i) => (
             <div
               key={i}
-              className="flex aspect-square items-center justify-center rounded-xl border border-dashed border-border-soft bg-white/[0.015] text-[11px] text-muted-dim"
+              className="relative flex aspect-square items-center justify-center border border-border-fine bg-white/[0.012]"
             >
-              coming soon
+              {PLATE_CORNERS.map((corner) => (
+                <span
+                  key={corner}
+                  className={`absolute h-3 w-3 border-white/20 ${corner}`}
+                />
+              ))}
+              <span className="font-mono text-[10px] tracking-[0.15em] text-muted-dim uppercase">
+                Plate {String(i + 1).padStart(2, "0")}
+              </span>
             </div>
           ))}
         </div>
