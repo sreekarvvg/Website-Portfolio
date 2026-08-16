@@ -4,6 +4,7 @@ import { Cursor } from "@/components/cursor";
 import { Curtain } from "@/components/curtain";
 import { Hero } from "@/components/hero";
 import { JourneyRail } from "@/components/journey-rail";
+import { MetaLabsSection } from "@/components/metalabs/section";
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
       <main>
         <Hero />
         <JourneyRail />
+        <MetaLabsSection />
       </main>
     </>
   );

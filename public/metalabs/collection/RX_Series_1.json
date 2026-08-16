@@ -1,0 +1,79 @@
+{
+  "name": "RX_Series_1",
+  "description": "With a mighty rawwrr, The RX669 enters the Metaverse to venture into uncharted digital territories.",
+  "image": "ipfs://QmVgNLTvKTuvUti9Y2Pbz3RHdcYwHgj5h3BjNXyVixSBhK/RX_Series_1.jpg",
+  "attributes": [
+    {
+      "trait_type": "ABILITY",
+      "value": "Hammer Smash"
+    },
+    {
+      "trait_type": "ATTACK BUFF",
+      "value": "None"
+    },
+    {
+      "trait_type": "BREED",
+      "value": "REX Berry Musical - Red Snapper"
+    },
+    {
+      "trait_type": "BREEDING PURITY ",
+      "value": "1"
+    },
+    {
+      "trait_type": "CLOTHES",
+      "value": "None"
+    },
+    {
+      "trait_type": "DEFENCE BUFF",
+      "value": "None"
+    },
+    {
+      "trait_type": "EYE COLOUR",
+      "value": "Country Blue"
+    },
+    {
+      "trait_type": "EYE WEARABLE",
+      "value": "None"
+    },
+    {
+      "trait_type": "HAND WEARABLE",
+      "value": "Titanium Fortune"
+    },
+    {
+      "trait_type": "HEALTH",
+      "value": "110"
+    },
+    {
+      "trait_type": "INVENTORY ",
+      "value": "T2"
+    },
+    {
+      "trait_type": "LEGENDARY ABILITY",
+      "value": "None"
+    },
+    {
+      "trait_type": "MOVEMENT BUFF",
+      "value": "None"
+    },
+    {
+      "trait_type": "NECK WEARABLE",
+      "value": "amber"
+    },
+    {
+      "trait_type": "SKIN COLOUR",
+      "value": "Pa Red"
+    },
+    {
+      "trait_type": "STAMINA",
+      "value": "100"
+    },
+    {
+      "trait_type": "TATTOO",
+      "value": "None"
+    },
+    {
+      "trait_type": "TEETH COLOUR",
+      "value": "Steel"
+    }
+  ]
+}
