@@ -35,13 +35,17 @@ export function MavipSection() {
 
         <h2
           id="mavip-heading"
-          className="font-display mt-4 text-[clamp(2rem,4.4vw,3.5rem)] leading-[1.02] tracking-[-0.025em] text-bone"
+          className="font-display mt-4 text-[clamp(1.75rem,3.8vw,3rem)] leading-[1.04] tracking-[-0.025em] text-bone"
         >
-          quotnt
-          <span className="block text-bone-dim italic">
-            The Founders&rsquo; Quotient
+          Strategy &amp; Product Management Intern
+          <span className="block text-bone-dim">
+            <span className="text-bone-faint italic">@ </span>
+            MAVIP Group
           </span>
         </h2>
+        <p className="label mt-3" style={{ color: ACCENT }}>
+          quotnt — The Founders&rsquo; Quotient
+        </p>
 
         <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-7">

@@ -30,16 +30,18 @@ export function MbaSection() {
           <span className="label" style={{ color: ACCENT }}>
             03 — MBA
           </span>
-          <span className="label text-bone-faint">
-            {mbaMeta.school} · {mbaMeta.period}
-          </span>
+          <span className="label text-bone-faint">{mbaMeta.period}</span>
         </div>
 
         <h2
           id="mba-heading"
-          className="font-display mt-5 text-[clamp(2.25rem,5.2vw,4.25rem)] leading-[1.02] tracking-[-0.025em] text-bone"
+          className="font-display mt-5 text-[clamp(1.9rem,4.2vw,3.4rem)] leading-[1.03] tracking-[-0.025em] text-bone"
         >
-          The wider lens
+          MBA, Marketing
+          <span className="block text-bone-dim">
+            <span className="text-bone-faint italic">@ </span>
+            {mbaMeta.school}
+          </span>
         </h2>
 
         <div className="mt-7 grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-10">

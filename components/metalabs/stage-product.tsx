@@ -50,11 +50,26 @@ export function StageProduct({ onExplore }: { onExplore: () => void }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-              className="font-display mt-5 text-[clamp(2.75rem,6vw,5.5rem)] leading-[0.95] tracking-[-0.025em] text-bone"
+              className="font-display mt-5 text-[clamp(2rem,4.4vw,3.75rem)] leading-[1.02] tracking-[-0.025em] text-bone"
             >
-              MetaLabs
-              <span className="block text-bone-dim italic">Technology</span>
+              Product Manager
+              <span className="block text-bone-dim">
+                <span className="text-bone-faint italic">@ </span>
+                Meta Labs Technology
+              </span>
             </motion.h3>
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-balance mt-5 max-w-xl text-sm leading-[1.6] text-bone sm:text-base"
+            >
+              Owned product from concept to MVP across 3 applications — scaled
+              the team 4&rarr;15, lifted development efficiency 80%, and grew
+              the community to 10.5K followers in 4 weeks.
+            </motion.p>
 
             <motion.div
               initial={{ opacity: 0 }}

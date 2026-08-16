@@ -7,6 +7,7 @@ import { JourneyRail } from "@/components/journey-rail";
 import { MetaLabsSection } from "@/components/metalabs/section";
 import { MbaSection } from "@/components/mba/section";
 import { MavipSection } from "@/components/mavip/section";
+import { IntellectSection } from "@/components/intellect/section";
 
 export default function Home() {
   return (
@@ -21,6 +22,7 @@ export default function Home() {
         <MetaLabsSection />
         <MbaSection />
         <MavipSection />
+        <IntellectSection />
       </main>
     </>
   );

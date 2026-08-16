@@ -166,7 +166,7 @@ export function JourneyRail() {
                         onBlur={() => setHovered(null)}
                         aria-expanded={isActive}
                         aria-controls={`${headingId}-record`}
-                        aria-label={`${m.index} — ${m.title}, ${m.period}. ${m.essence}.`}
+                        aria-label={`${m.index} — ${m.role} at ${m.org}, ${m.period}. ${m.essence}.`}
                         className="group relative flex h-20 w-20 cursor-pointer items-center justify-center"
                       >
                         {/* halo */}
@@ -232,14 +232,17 @@ export function JourneyRail() {
                     {m.index}
                   </motion.span>
                   <motion.span
-                    className="font-display mt-2 block text-lg tracking-[-0.01em]"
+                    className="font-display mt-2 block max-w-[13rem] text-[15px] leading-tight tracking-[-0.01em] whitespace-normal"
                     animate={{
                       color: lifted ? "var(--bone)" : "var(--bone-dim)",
                     }}
                     transition={{ duration: 0.3 }}
                   >
-                    {m.title}
+                    {m.role}
                   </motion.span>
+                  <span className="label mt-1 block text-bone-faint">
+                    {m.org}
+                  </span>
                   <AnimatePresence>
                     {lifted && (
                       <motion.span
@@ -307,8 +310,11 @@ export function JourneyRail() {
                     >
                       {m.index} — {m.period}
                     </span>
-                    <span className="font-display mt-1 block text-2xl text-bone">
-                      {m.title}
+                    <span className="font-display mt-1 block text-xl leading-tight text-bone">
+                      {m.role}
+                    </span>
+                    <span className="label mt-1 block text-bone-faint">
+                      {m.org}
                     </span>
                   </span>
                   <motion.span

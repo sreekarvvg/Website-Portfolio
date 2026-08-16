@@ -100,15 +100,23 @@ body.cursor-hidden * {
   }
 }
 
-/* MetaLabs track: stacked on mobile, horizontally translated from md up.
-   Driving the transform through a custom property means the same markup
-   works for both, with no JS branch and no hydration mismatch. */
-.ml-track {
+/* Horizontal deck: stacked on mobile, translated horizontally from md up.
+   Driving the transform and the widths through custom properties means the
+   same markup serves both, with no JS branch and no hydration mismatch. */
+.deck-track,
+.deck-stage {
+  width: 100%;
+}
+.deck-track {
   transform: none;
 }
 @media (min-width: 768px) {
-  .ml-track {
+  .deck-track {
+    width: calc(var(--stages) * 100%);
     transform: translate3d(var(--track-x, 0%), 0, 0);
+  }
+  .deck-stage {
+    width: calc(100% / var(--stages));
   }
 }
 

@@ -28,23 +28,31 @@ export function DocumentReader({
   doc,
   open,
   onClose,
+  startPage,
 }: {
   doc: ReaderDoc | null;
   open: boolean;
   onClose: () => void;
+  /**
+   * Open at a specific page. When supplied, each open re-seeds to it — used
+   * where a caller links to one slide. When omitted, the reader keeps the page
+   * it was left on, so a slot that owns one document reopens where it was.
+   */
+  startPage?: number;
 }) {
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(startPage ?? 1);
   const [dir, setDir] = useState(1);
 
-  // Reset only when the reader is pointed at a different document — not on
-  // open/close — so a slot that owns one document reopens where it was left.
   // Adjusting state during render is React's recommended alternative to an
   // effect here.
-  const docKey = doc?.id ?? null;
-  const [lastDocKey, setLastDocKey] = useState<string | null>(docKey);
-  if (docKey !== lastDocKey) {
-    setLastDocKey(docKey);
-    setPage(1);
+  const seeded = startPage !== undefined;
+  const resetKey = seeded
+    ? `${doc?.id ?? ""}:${startPage}:${open}`
+    : `${doc?.id ?? ""}`;
+  const [lastResetKey, setLastResetKey] = useState(resetKey);
+  if (resetKey !== lastResetKey) {
+    setLastResetKey(resetKey);
+    setPage(startPage ?? 1);
     setDir(1);
   }
 

@@ -45,18 +45,30 @@ export function MilestoneRecord({
           </span>
           <h3
             className={`font-display mt-4 tracking-[-0.02em] text-bone ${
-              compact ? "text-3xl" : "text-[clamp(2rem,3.6vw,3.25rem)] leading-[1.04]"
+              compact
+                ? "text-2xl leading-tight"
+                : "text-[clamp(1.6rem,2.9vw,2.6rem)] leading-[1.06]"
             }`}
           >
-            {milestone.title}
+            {milestone.role}
           </h3>
-          <p className="font-display mt-2 text-xl italic text-bone-dim">
-            {milestone.essence}
+          <p className="font-display mt-1.5 text-lg text-bone-dim">
+            <span className="text-bone-faint italic">@ </span>
+            {milestone.org}
           </p>
+          <p className="label mt-3 text-bone-faint">{milestone.essence}</p>
         </div>
 
         <div className={compact ? "" : "lg:col-span-7"}>
-          <p className="text-balance max-w-2xl text-lg leading-[1.7] text-bone-dim">
+          <p
+            className="text-balance max-w-2xl border-l pl-4 text-[15px] leading-[1.6] text-bone"
+            style={{
+              borderColor: `color-mix(in oklab, ${milestone.hue} 45%, transparent)`,
+            }}
+          >
+            {milestone.impact}
+          </p>
+          <p className="text-balance mt-5 max-w-2xl text-[15px] leading-[1.7] text-bone-dim">
             {milestone.description}
           </p>
 

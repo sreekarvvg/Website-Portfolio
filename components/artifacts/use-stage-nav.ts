@@ -1,19 +1,22 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { STAGE_COUNT } from "@/lib/metalabs";
-
 /**
  * Drives the horizontal journey from ordinary vertical scroll.
  *
- * The section is (STAGE_COUNT × 100vh) tall with a sticky viewport inside it,
+ * The section is (stageCount × 100vh) tall with a sticky viewport inside it,
  * so native wheel / trackpad / touch all work untouched — nothing is hijacked,
  * and the page enters and exits the module by simply scrolling. Explicit
  * prev/next controls and arrow keys jump to a stage; once scrolling settles
  * the view eases to the nearest stage so the journey advances one step at a
  * time rather than resting between two.
  */
-export function useStageNav(ref: React.RefObject<HTMLElement | null>) {
+export function useStageNav(
+  ref: React.RefObject<HTMLElement | null>,
+  stageCount: number,
+  /** DOM id prefix for the stacked mobile panels */
+  idPrefix: string,
+) {
   const [stage, setStage] = useState(0);
   const [active, setActive] = useState(false);
   const settleTimer = useRef<number | null>(null);
@@ -25,21 +28,21 @@ export function useStageNav(ref: React.RefObject<HTMLElement | null>) {
       const el = ref.current;
       if (!el) return 0;
       const span = el.offsetHeight - window.innerHeight;
-      return el.offsetTop + (span * index) / (STAGE_COUNT - 1);
+      return el.offsetTop + (span * index) / (stageCount - 1);
     },
-    [ref],
+    [ref, stageCount],
   );
 
   const goTo = useCallback(
     (index: number) => {
-      const clamped = Math.max(0, Math.min(STAGE_COUNT - 1, index));
+      const clamped = Math.max(0, Math.min(stageCount - 1, index));
       const smooth = !window.matchMedia("(prefers-reduced-motion: reduce)")
         .matches;
 
       // Below md the stages are stacked, so jump to the panel itself.
       if (!window.matchMedia("(min-width: 768px)").matches) {
         document
-          .getElementById(`metalabs-stage-${clamped + 1}`)
+          .getElementById(`${idPrefix}-stage-${clamped + 1}`)
           ?.scrollIntoView({ behavior: smooth ? "smooth" : "auto" });
         setStage(clamped);
         return;
@@ -55,7 +58,7 @@ export function useStageNav(ref: React.RefObject<HTMLElement | null>) {
         programmatic.current = false;
       }, 900);
     },
-    [offsetFor],
+    [offsetFor, stageCount, idPrefix],
   );
 
   useEffect(() => {
@@ -89,7 +92,7 @@ export function useStageNav(ref: React.RefObject<HTMLElement | null>) {
 
       const p = readProgress();
       if (p === null) return;
-      const nearest = Math.round(p * (STAGE_COUNT - 1));
+      const nearest = Math.round(p * (stageCount - 1));
       setStage(nearest);
 
       if (!inView || programmatic.current || reduced) return;
@@ -97,7 +100,7 @@ export function useStageNav(ref: React.RefObject<HTMLElement | null>) {
       // ease to the nearest stage once the user stops scrolling
       if (settleTimer.current) window.clearTimeout(settleTimer.current);
       settleTimer.current = window.setTimeout(() => {
-        const exact = p * (STAGE_COUNT - 1);
+        const exact = p * (stageCount - 1);
         if (Math.abs(exact - nearest) < 0.04) return;
         programmatic.current = true;
         window.scrollTo({ top: offsetFor(nearest), behavior: "smooth" });
@@ -134,7 +137,7 @@ export function useStageNav(ref: React.RefObject<HTMLElement | null>) {
       window.removeEventListener("keydown", onKey);
       if (settleTimer.current) window.clearTimeout(settleTimer.current);
     };
-  }, [ref, goTo, offsetFor, stage]);
+  }, [ref, goTo, offsetFor, stage, stageCount]);
 
   return { stage, active, goTo };
 }
