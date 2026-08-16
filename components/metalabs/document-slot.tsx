@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import type { DocSpec } from "@/lib/metalabs";
-import { DocumentReader } from "./document-reader";
+import { DocumentReader } from "@/components/artifacts/document-reader";
 
 /**
  * A self-contained document card. Each slot owns its own open state and its

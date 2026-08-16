@@ -2,15 +2,15 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import type { MbaDoc } from "@/lib/mba";
-import { DocumentReader } from "@/components/metalabs/document-reader";
+import type { ArtifactDoc } from "@/lib/artifacts";
+import { DocumentReader } from "./document-reader";
 
 /** One-page artifact shown as a single card that opens into a larger view. */
 export function SingleDocCard({
   doc,
   accent,
 }: {
-  doc: MbaDoc;
+  doc: ArtifactDoc;
   accent: string;
 }) {
   const [open, setOpen] = useState(false);

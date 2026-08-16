@@ -10,7 +10,7 @@ import {
 } from "@/lib/metalabs";
 import { Metric } from "./stage-shell";
 import { PersonaStack } from "./persona-stack";
-import { DocumentReader } from "./document-reader";
+import { DocumentReader } from "@/components/artifacts/document-reader";
 
 export function StageUnderstand() {
   const [readerOpen, setReaderOpen] = useState(false);

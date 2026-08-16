@@ -1,3 +1,5 @@
+import type { ArtifactDoc } from "./artifacts";
+
 /**
  * MBA — IMT Ghaziabad, 2024–2026. Milestone 03, so this section carries the
  * spectrum's amber hue. Artifacts come from the `MBA` branch.
@@ -34,17 +36,8 @@ export const lessons = [
   },
 ] as const;
 
-export type MbaDoc = {
-  id: string;
-  org: string;
-  title: string;
-  meta: string;
-  pages: number;
-  dir: string;
-};
-
 /** Single-page winning solution — shown as one document card. */
-export const thoucentric: MbaDoc = {
+export const thoucentric: ArtifactDoc = {
   id: "thoucentric",
   org: "Thoucentric",
   title: "Management Consulting Case Competition",
@@ -54,7 +47,7 @@ export const thoucentric: MbaDoc = {
 };
 
 /** Three-page deck — shown as an auto-cycling stack. */
-export const loreal: MbaDoc = {
+export const loreal: ArtifactDoc = {
   id: "loreal",
   org: "L'Oréal",
   title: "Product Discovery & Innovation",

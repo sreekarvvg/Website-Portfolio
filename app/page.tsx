@@ -6,6 +6,7 @@ import { Hero } from "@/components/hero";
 import { JourneyRail } from "@/components/journey-rail";
 import { MetaLabsSection } from "@/components/metalabs/section";
 import { MbaSection } from "@/components/mba/section";
+import { MavipSection } from "@/components/mavip/section";
 
 export default function Home() {
   return (
@@ -19,6 +20,7 @@ export default function Home() {
         <JourneyRail />
         <MetaLabsSection />
         <MbaSection />
+        <MavipSection />
       </main>
     </>
   );

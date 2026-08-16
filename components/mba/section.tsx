@@ -3,8 +3,8 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { lessons, loreal, mbaMeta, thoucentric } from "@/lib/mba";
-import { PageStack } from "./page-stack";
-import { SingleDocCard } from "./single-doc-card";
+import { PageStack } from "@/components/artifacts/page-stack";
+import { SingleDocCard } from "@/components/artifacts/single-doc-card";
 
 const ACCENT = "var(--s3)"; // milestone 03 — amber
 
