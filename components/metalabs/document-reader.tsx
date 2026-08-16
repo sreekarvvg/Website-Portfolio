@@ -4,9 +4,19 @@ import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import type { DocSpec } from "@/lib/metalabs";
+/** Structural shape any paged artifact can satisfy, across sections. */
+export type ReaderDoc = {
+  id: string;
+  title: string;
+  meta: string;
+  pages: number;
+  dir: string;
+  category?: string;
+  /** accent colour for this reader; defaults to the MetaLabs mint */
+  accent?: string;
+};
 
-function pageSrc(doc: DocSpec, page: number) {
+function pageSrc(doc: ReaderDoc, page: number) {
   return `${doc.dir}/p${String(page).padStart(2, "0")}.webp`;
 }
 
@@ -19,7 +29,7 @@ export function DocumentReader({
   open,
   onClose,
 }: {
-  doc: DocSpec | null;
+  doc: ReaderDoc | null;
   open: boolean;
   onClose: () => void;
 }) {
@@ -70,6 +80,7 @@ export function DocumentReader({
   }, [open, onClose, turn]);
 
   if (typeof document === "undefined" || !doc) return null;
+  const accent = doc.accent ?? "var(--ml-accent)";
 
   return createPortal(
     <AnimatePresence>
@@ -82,11 +93,16 @@ export function DocumentReader({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.25 }}
+          style={{ "--reader-accent": accent } as React.CSSProperties}
           className="fixed inset-0 z-[200] flex flex-col bg-ink/96 backdrop-blur-xl"
         >
           <div className="flex shrink-0 items-start justify-between gap-6 px-6 py-5 sm:px-10">
             <div>
-              <span className="label block text-ml-accent">{doc.category}</span>
+              {doc.category && (
+                <span className="label block" style={{ color: accent }}>
+                  {doc.category}
+                </span>
+              )}
               <h4 className="font-display mt-1 text-xl text-bone">
                 {doc.title}
               </h4>
@@ -131,13 +147,13 @@ export function DocumentReader({
               onClick={() => turn(-1)}
               disabled={page === 1}
               aria-label="Previous page"
-              className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-hair text-bone-dim transition-colors hover:border-ml-accent hover:text-ml-accent disabled:cursor-not-allowed disabled:opacity-25"
+              className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-hair text-bone-dim transition-colors hover:border-[var(--reader-accent)] hover:text-[var(--reader-accent)] disabled:cursor-not-allowed disabled:opacity-25"
             >
               ←
             </button>
             <span className="label tabular-nums text-bone-dim" aria-live="polite">
               Page{" "}
-              <span className="text-ml-accent">
+              <span style={{ color: accent }}>
                 {String(page).padStart(2, "0")}
               </span>{" "}
               / {String(doc.pages).padStart(2, "0")}
@@ -147,7 +163,7 @@ export function DocumentReader({
               onClick={() => turn(1)}
               disabled={page === doc.pages}
               aria-label="Next page"
-              className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-hair text-bone-dim transition-colors hover:border-ml-accent hover:text-ml-accent disabled:cursor-not-allowed disabled:opacity-25"
+              className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-hair text-bone-dim transition-colors hover:border-[var(--reader-accent)] hover:text-[var(--reader-accent)] disabled:cursor-not-allowed disabled:opacity-25"
             >
               →
             </button>

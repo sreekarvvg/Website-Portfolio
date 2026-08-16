@@ -42,7 +42,7 @@ export function PersonaStack() {
       </div>
 
       <div
-        className="relative aspect-[16/10] w-full md:aspect-auto md:min-h-0 md:flex-1"
+        className="relative aspect-[16/9] w-full"
         onPointerEnter={() => setPaused(true)}
         onPointerLeave={() => setPaused(false)}
         onFocusCapture={() => setPaused(true)}

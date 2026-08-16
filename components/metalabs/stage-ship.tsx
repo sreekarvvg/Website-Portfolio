@@ -55,7 +55,7 @@ export function StageShip({ onRestart }: { onRestart: () => void }) {
                   alt={a.caption}
                   fill
                   sizes="20vw"
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="object-contain p-1.5 transition-transform duration-700 group-hover:scale-[1.03]"
                 />
                 <span className="label absolute bottom-2 left-2 text-bone opacity-0 transition-opacity group-hover:opacity-100">
                   {a.caption}
