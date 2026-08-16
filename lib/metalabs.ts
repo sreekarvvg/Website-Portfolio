@@ -28,6 +28,9 @@ export const headlineMetrics = [
   { value: "XX", label: "[Metric to be added]", pending: true },
 ] as const;
 
+export const theIdea =
+  "The CEO envisioned an open-world game blending blockchain, AR, VR and Unity — connecting real and virtual worlds, enabling play-to-earn, and allowing digital assets to move across games.";
+
 export const collaboration = [
   "Product",
   "Design",
@@ -162,6 +165,7 @@ export const researchNarrative = [
 
 export const RESEARCH_DOC = {
   id: "research",
+  category: "Research",
   title: "Competitive Research",
   meta: "Compiled archive · 30 competitors",
   pages: 12,
@@ -303,35 +307,38 @@ export const conceptGallery: Artifact[] = [
 
 export type DocSpec = {
   id: string;
+  /** the documentation category this artifact evidences */
+  category: string;
   title: string;
   meta: string;
   pages: number;
   dir: string;
-  confidential?: boolean;
 };
 
 export const documents: DocSpec[] = [
   {
+    id: "technical",
+    category: "Technical Documentation",
+    title: "Character NFT — Technical Description",
+    meta: "Technical spec",
+    pages: 2,
+    dir: "/metalabs/docs/technical",
+  },
+  {
     id: "whitepaper",
+    category: "Whitepapers",
     title: "Obverse Whitepaper",
-    meta: "Whitepaper · June 2022",
+    meta: "June 2022",
     pages: 18,
     dir: "/metalabs/docs/whitepaper",
   },
   {
     id: "economy",
+    category: "Game Economy",
     title: "RX 669 S — Game XP & Economy",
     meta: "Game design doc · 1st draft",
     pages: 16,
     dir: "/metalabs/docs/economy",
-    confidential: true,
-  },
-  {
-    id: "technical",
-    title: "Character NFT — Technical Description",
-    meta: "Technical spec",
-    pages: 2,
-    dir: "/metalabs/docs/technical",
   },
 ];
 
@@ -397,5 +404,3 @@ export const collection: Artifact[] = [
     kind: "Token 3",
   },
 ];
-
-export const METADATA_SRC = "/metalabs/collection/RX_Series_1.json";

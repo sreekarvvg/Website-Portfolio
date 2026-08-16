@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { collaboration, headlineMetrics } from "@/lib/metalabs";
+import { collaboration, headlineMetrics, theIdea } from "@/lib/metalabs";
 import { Metric } from "./stage-shell";
 
 export function StageProduct({ onExplore }: { onExplore: () => void }) {
@@ -81,19 +81,19 @@ export function StageProduct({ onExplore }: { onExplore: () => void }) {
             transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-5"
           >
-            <div className="border-l border-ml-accent/30 pl-6">
+            <div className="border-l border-hair pl-6">
+              <span className="label text-bone-faint">The Idea</span>
+              <p className="font-display mt-3 text-balance text-lg leading-[1.45] text-bone-dim italic sm:text-xl">
+                {theIdea}
+              </p>
+            </div>
+            <div className="mt-6 border-l border-ml-accent/40 pl-6">
               <span className="label text-ml-accent">The Solution</span>
-              <p className="mt-4 text-balance text-base leading-[1.6] text-bone sm:text-lg">
+              <p className="mt-3 text-balance text-base leading-[1.6] text-bone sm:text-lg">
                 A mobile-first Web3 gaming ecosystem combining gameplay,
                 digital ownership, rewards, virtual worlds, AR experiences and
                 real-world utility.
               </p>
-              <div className="mt-8 border-t border-hair-faint pt-6">
-                <span className="label text-bone-faint">The Idea</span>
-                <p className="mt-3 text-sm text-bone-faint italic">
-                  [Placeholder]
-                </p>
-              </div>
             </div>
           </motion.div>
         </div>

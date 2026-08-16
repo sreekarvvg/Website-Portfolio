@@ -26,12 +26,14 @@ export function DocumentReader({
   const [page, setPage] = useState(1);
   const [dir, setDir] = useState(1);
 
-  // Reset to page 1 whenever a different document is opened. Adjusting state
-  // during render is React's recommended alternative to an effect here.
-  const openKey = open ? (doc?.id ?? null) : null;
-  const [lastOpenKey, setLastOpenKey] = useState<string | null>(null);
-  if (openKey !== lastOpenKey) {
-    setLastOpenKey(openKey);
+  // Reset only when the reader is pointed at a different document — not on
+  // open/close — so a slot that owns one document reopens where it was left.
+  // Adjusting state during render is React's recommended alternative to an
+  // effect here.
+  const docKey = doc?.id ?? null;
+  const [lastDocKey, setLastDocKey] = useState<string | null>(docKey);
+  if (docKey !== lastDocKey) {
+    setLastDocKey(docKey);
     setPage(1);
     setDir(1);
   }
@@ -84,14 +86,12 @@ export function DocumentReader({
         >
           <div className="flex shrink-0 items-start justify-between gap-6 px-6 py-5 sm:px-10">
             <div>
-              <h4 className="font-display text-xl text-bone">{doc.title}</h4>
+              <span className="label block text-ml-accent">{doc.category}</span>
+              <h4 className="font-display mt-1 text-xl text-bone">
+                {doc.title}
+              </h4>
               <span className="label mt-1 block text-bone-faint">
                 {doc.meta}
-                {doc.confidential && (
-                  <span className="ml-3 text-ml-accent">
-                    · marked confidential in source
-                  </span>
-                )}
               </span>
             </div>
             <button

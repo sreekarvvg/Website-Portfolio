@@ -5,7 +5,6 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { collection, collectionSteps, pipeline } from "@/lib/metalabs";
 import { Lightbox } from "./lightbox";
-import { ArtifactPanel } from "./artifact-panel";
 
 export function StageShip({ onRestart }: { onRestart: () => void }) {
   const [open, setOpen] = useState<number | null>(null);
@@ -99,7 +98,7 @@ export function StageShip({ onRestart }: { onRestart: () => void }) {
             </ol>
           </div>
 
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-x-8 gap-y-5 border-t border-hair-faint pt-5 sm:grid-cols-2">
             <div>
               <span className="label text-ml-accent">Automation</span>
               <p className="mt-2 text-[13px] leading-relaxed text-bone-dim">
@@ -109,10 +108,11 @@ export function StageShip({ onRestart }: { onRestart: () => void }) {
               </p>
             </div>
             <div>
-              <span className="label text-bone-faint">Technical artifact</span>
-              <div className="mt-2">
-                <ArtifactPanel />
-              </div>
+              <span className="label text-ml-accent">Scale</span>
+              <p className="mt-2 text-[13px] leading-relaxed text-bone-dim">
+                7,000+ digital assets generated, validated and prepared for
+                shipment without a single mismatched trait.
+              </p>
             </div>
           </div>
 

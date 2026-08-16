@@ -68,7 +68,7 @@ export function MetaLabsSection() {
       <div className="md:sticky md:top-0 md:h-svh md:w-full md:overflow-hidden">
         <motion.div
           style={{ "--track-x": trackX } as React.CSSProperties}
-          className="ml-track flex flex-col md:w-[600%] md:flex-row"
+          className="ml-track flex flex-col md:h-full md:w-[600%] md:flex-row"
         >
           {panels.map((panel, i) => (
             <div

@@ -1,24 +1,10 @@
 "use client";
 
-import Image from "next/image";
-import { useState } from "react";
 import { motion } from "framer-motion";
-import {
-  documentationTypes,
-  documents,
-  productLoop,
-  type DocSpec,
-} from "@/lib/metalabs";
-import { DocumentReader } from "./document-reader";
+import { documentationTypes, documents, productLoop } from "@/lib/metalabs";
+import { DocumentSlot } from "./document-slot";
 
 export function StageBuild() {
-  const [front, setFront] = useState(0);
-  const [reading, setReading] = useState<DocSpec | null>(null);
-
-  const ordered = documents.map(
-    (_, i) => documents[(front + i) % documents.length],
-  );
-
   return (
     <div className="flex w-full flex-col px-6 pt-20 pb-28 sm:px-10 md:h-full md:pt-24 md:pb-24 lg:px-16">
       <header className="shrink-0">
@@ -36,113 +22,43 @@ export function StageBuild() {
         </p>
       </header>
 
-      <div className="mt-6 grid grid-cols-1 gap-8 md:min-h-0 md:flex-1 lg:grid-cols-12 lg:gap-10">
-        {/* ── Document stack ───────────────────────── */}
-        <div className="flex min-h-0 flex-col lg:col-span-6">
-          <div className="mb-3 flex shrink-0 items-baseline justify-between">
+      {/* the single implicit row must fill the container, otherwise it sizes to
+          content and the columns cannot stretch */}
+      <div className="mt-6 grid grid-cols-1 gap-8 md:min-h-0 md:flex-1 md:grid-rows-[minmax(0,1fr)] lg:grid-cols-12 lg:gap-10">
+        {/* ── Three independent document readers ───── */}
+        <div className="flex min-w-0 flex-col md:min-h-0 lg:col-span-7">
+          <div className="mb-4 flex shrink-0 items-baseline justify-between gap-4">
             <span className="label text-bone-faint">Product documentation</span>
-            <span className="label text-bone-faint">Click to read</span>
+            <span className="label text-bone-faint">
+              Click any document to read
+            </span>
           </div>
 
-          <div className="relative aspect-[3/4] w-full md:aspect-auto md:min-h-0 md:flex-1">
-            {ordered.map((doc, depth) => {
-              const isFront = depth === 0;
-              return (
-                <motion.div
-                  key={doc.id}
-                  initial={false}
-                  animate={{
-                    y: depth * -14,
-                    x: depth * 20,
-                    scale: 1 - depth * 0.04,
-                    opacity: isFront ? 1 : 0.4 - depth * 0.1,
-                  }}
-                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                  style={{ zIndex: documents.length - depth }}
-                  className="absolute inset-0"
-                >
-                  <button
-                    type="button"
-                    onClick={() =>
-                      isFront ? setReading(doc) : setFront((f) => (f + depth) % documents.length)
-                    }
-                    data-cursor
-                    data-cursor-label={isFront ? "Open" : "Bring forward"}
-                    aria-label={
-                      isFront
-                        ? `Open ${doc.title}, ${doc.pages} pages`
-                        : `Bring ${doc.title} to front`
-                    }
-                    className="group relative h-full w-full cursor-pointer overflow-hidden rounded-sm border border-hair bg-white shadow-2xl shadow-black/70"
-                  >
-                    <Image
-                      src={`${doc.dir}/p01.webp`}
-                      alt=""
-                      fill
-                      sizes="(max-width: 1024px) 90vw, 40vw"
-                      className="object-contain object-top"
-                    />
-                    {isFront && (
-                      <>
-                        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink via-ink/85 to-transparent p-4 pt-12 text-left">
-                          <span className="font-display block text-lg leading-tight text-bone">
-                            {doc.title}
-                          </span>
-                          <span className="label mt-1 block text-bone-dim">
-                            {doc.meta} · {doc.pages} pages
-                          </span>
-                        </div>
-                        <span className="absolute top-3 right-3 rounded-full bg-ml-accent px-3 py-1 label text-ink opacity-0 transition-opacity group-hover:opacity-100">
-                          Open →
-                        </span>
-                      </>
-                    )}
-                  </button>
-                </motion.div>
-              );
-            })}
-          </div>
-
-          <div className="mt-3 flex shrink-0 gap-1.5">
-            {documents.map((d, i) => (
-              <button
-                key={d.id}
-                type="button"
-                onClick={() => setFront(i)}
-                aria-label={`Bring ${d.title} to front`}
-                className="cursor-pointer py-2"
-              >
-                <span
-                  className={`block h-0.5 w-8 transition-colors ${
-                    i === front ? "bg-ml-accent" : "bg-hair"
-                  }`}
-                />
-              </button>
+          <div className="grid grid-cols-3 gap-4 sm:gap-5 md:min-h-0 md:flex-1 md:grid-rows-[minmax(0,1fr)]">
+            {documents.map((doc, i) => (
+              <DocumentSlot key={doc.id} doc={doc} index={i} />
             ))}
           </div>
+
+          <ul className="mt-6 flex shrink-0 flex-wrap gap-x-2.5 gap-y-2">
+            {documentationTypes.map((t) => (
+              <li
+                key={t}
+                className="label border border-hair px-2.5 py-1 text-bone-dim"
+              >
+                {t}
+              </li>
+            ))}
+          </ul>
         </div>
 
-        {/* ── Loop + doc types ─────────────────────── */}
-        <div className="flex min-h-0 flex-col gap-6 overflow-auto lg:col-span-6">
+        {/* ── Loop + principle ─────────────────────── */}
+        <div className="flex min-w-0 flex-col gap-6 md:min-h-0 md:overflow-auto lg:col-span-5">
           <div>
-            <span className="label text-bone-faint">Documentation produced</span>
-            <ul className="mt-3 flex flex-wrap gap-x-3 gap-y-2">
-              {documentationTypes.map((t) => (
-                <li
-                  key={t}
-                  className="label border border-hair px-2.5 py-1 text-bone-dim"
-                >
-                  {t}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="border-t border-hair-faint pt-5">
             <span className="label text-bone-faint">
               Product management loop
             </span>
-            <ol className="mt-4 space-y-0">
+            <ol className="mt-4">
               {productLoop.map((step, i) => (
                 <motion.li
                   key={step}
@@ -150,17 +66,17 @@ export function StageBuild() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.45, delay: i * 0.07 }}
-                  className="flex items-center gap-3"
+                  className="grid grid-cols-[auto_1fr] items-start gap-x-3"
                 >
-                  <span className="flex flex-col items-center">
-                    <span className="h-1.5 w-1.5 rounded-full bg-ml-accent" />
+                  <span className="flex h-full flex-col items-center pt-1.5">
+                    <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-ml-accent" />
                     {i < productLoop.length - 1 && (
-                      <span className="h-6 w-px bg-gradient-to-b from-ml-accent/60 to-ml-accent/10" />
+                      <span className="w-px flex-1 bg-gradient-to-b from-ml-accent/60 to-ml-accent/10" />
                     )}
                   </span>
                   <span
-                    className={`text-sm ${i === 0 ? "text-bone" : "text-bone-dim"} ${
-                      i < productLoop.length - 1 ? "-mt-6" : ""
+                    className={`pb-4 text-sm ${
+                      i === 0 ? "text-bone" : "text-bone-dim"
                     }`}
                   >
                     {step}
@@ -179,12 +95,6 @@ export function StageBuild() {
           </div>
         </div>
       </div>
-
-      <DocumentReader
-        doc={reading}
-        open={reading !== null}
-        onClose={() => setReading(null)}
-      />
     </div>
   );
 }
