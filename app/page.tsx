@@ -1,20 +1,20 @@
-import { BackgroundFx } from "@/components/background-fx";
-import { ScrollProgress } from "@/components/scroll-progress";
-import { CursorDot } from "@/components/cursor-dot";
-import { DraftingFrame } from "@/components/drafting-frame";
+import { Atmosphere } from "@/components/atmosphere";
+import { SmoothScroll } from "@/components/smooth-scroll";
+import { Cursor } from "@/components/cursor";
+import { Curtain } from "@/components/curtain";
 import { Hero } from "@/components/hero";
-import { JourneyRoadmap } from "@/components/journey-roadmap";
+import { JourneyRail } from "@/components/journey-rail";
 
 export default function Home() {
   return (
     <>
-      <BackgroundFx />
-      <DraftingFrame />
-      <ScrollProgress />
-      <CursorDot />
+      <Atmosphere />
+      <SmoothScroll />
+      <Cursor />
+      <Curtain />
       <main>
         <Hero />
-        <JourneyRoadmap />
+        <JourneyRail />
       </main>
     </>
   );

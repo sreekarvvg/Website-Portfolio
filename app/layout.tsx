@@ -1,18 +1,17 @@
 import type { Metadata } from "next";
-import { Fraunces, Inter, JetBrains_Mono } from "next/font/google";
+import { Instrument_Serif, Inter_Tight, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const display = Fraunces({
+const display = Instrument_Serif({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400"],
   style: ["normal", "italic"],
 });
 
-const body = Inter({
-  variable: "--font-body",
+const sans = Inter_Tight({
+  variable: "--font-sans",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
 });
 
 const mono = JetBrains_Mono({
@@ -31,11 +30,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${display.variable} ${body.variable} ${mono.variable} h-full scroll-smooth`}
+      className={`${display.variable} ${sans.variable} ${mono.variable}`}
     >
-      <body className="min-h-full bg-background text-foreground antialiased">
-        {children}
-      </body>
+      <body className="antialiased">{children}</body>
     </html>
   );
 }
