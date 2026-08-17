@@ -8,6 +8,7 @@ import { MetaLabsSection } from "@/components/metalabs/section";
 import { MbaSection } from "@/components/mba/section";
 import { MavipSection } from "@/components/mavip/section";
 import { IntellectSection } from "@/components/intellect/section";
+import { EngineeringSection } from "@/components/engineering/section";
 
 export default function Home() {
   return (
@@ -23,6 +24,9 @@ export default function Home() {
         <MbaSection />
         <MavipSection />
         <IntellectSection />
+        {/* Engineering closes the journey rather than opening it — the
+            foundation reads best once you know what it led to. */}
+        <EngineeringSection />
       </main>
     </>
   );
