@@ -56,6 +56,38 @@ export function Footer() {
           and building things people actually use.
         </motion.p>
 
+        {/* The one thing a recruiter reaches for first, given the weight of an
+            action rather than the weight of a contact channel. */}
+        <motion.a
+          href={site.cv}
+          target="_blank"
+          rel="noreferrer noopener"
+          data-cursor
+          data-cursor-label="CV"
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          className="group mt-8 flex w-fit items-center gap-4 border px-6 py-4 transition-colors hover:bg-[color-mix(in_oklab,var(--s4)_12%,transparent)]"
+          style={{
+            borderColor: "color-mix(in oklab, var(--s4) 45%, transparent)",
+          }}
+        >
+          <span
+            className="font-display text-lg leading-none sm:text-xl"
+            style={{ color: "var(--s4)" }}
+          >
+            Download CV
+          </span>
+          <span className="label text-bone-faint">PDF</span>
+          <span
+            aria-hidden
+            className="text-bone-dim transition-transform group-hover:translate-x-1"
+          >
+            ↓
+          </span>
+        </motion.a>
+
         <ul className="mt-12 grid grid-cols-1 gap-x-10 gap-y-px border-t border-hair sm:grid-cols-3 sm:gap-y-0">
           {LINKS.map((l, i) => (
             <motion.li

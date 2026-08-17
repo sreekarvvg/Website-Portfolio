@@ -27,6 +27,8 @@ export const site = {
   description:
     "Product management professional with ~3 years across AI commercialization, product strategy, growth and enterprise solutions. Case studies from Intellect Design Arena, Meta Labs Technology, MAVIP Group and IMT Ghaziabad, plus engineering and multi-agent AI work.",
   email: "sreekarvvg2000@gmail.com",
+  /** Served from public/ so the link never depends on a branch or a viewer. */
+  cv: "/Sai-Sreekar-VVG-Product-Management.pdf",
   linkedin: "https://linkedin.com/in/sreekarvvg",
   github: "https://github.com/sreekarvvg",
   keywords: [
