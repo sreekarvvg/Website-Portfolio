@@ -9,6 +9,7 @@ import { MbaSection } from "@/components/mba/section";
 import { MavipSection } from "@/components/mavip/section";
 import { IntellectSection } from "@/components/intellect/section";
 import { EngineeringSection } from "@/components/engineering/section";
+import { Footer } from "@/components/footer";
 
 export default function Home() {
   return (
@@ -28,6 +29,7 @@ export default function Home() {
             foundation reads best once you know what it led to. */}
         <EngineeringSection />
       </main>
+      <Footer />
     </>
   );
 }

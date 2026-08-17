@@ -1,10 +1,46 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { collaboration, headlineMetrics, theIdea } from "@/lib/metalabs";
 import { Metric } from "./stage-shell";
 
+/**
+ * The film is several screens below the fold and weighs megabytes, so its
+ * source is attached only once this stage approaches the viewport. Anyone who
+ * never reaches MetaLabs — or who asks for reduced motion — never pays for it,
+ * and the poster carries the stage in the meantime.
+ */
+function useFilmSource() {
+  const ref = useRef<HTMLVideoElement>(null);
+  const [attach, setAttach] = useState(false);
+
+  useEffect(() => {
+    if (attach) return;
+    const el = ref.current;
+    if (!el) return;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setAttach(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "300px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [attach]);
+
+  return [ref, attach] as const;
+}
+
 export function StageProduct({ onExplore }: { onExplore: () => void }) {
+  const [filmRef, filmReady] = useFilmSource();
+
   return (
     <div className="relative h-full w-full overflow-hidden">
       {/* Background film — subdued, never competing with the text.
@@ -17,14 +53,15 @@ export function StageProduct({ onExplore }: { onExplore: () => void }) {
         style={{ backgroundImage: "url(/metalabs/concept/street-exterior.webp)" }}
       />
       <video
+        ref={filmRef}
         className="absolute inset-0 h-full w-full object-cover"
-        src="/metalabs/video/metalabs.mp4"
+        src={filmReady ? "/metalabs/video/metalabs.mp4" : undefined}
         poster="/metalabs/concept/street-exterior.webp"
         autoPlay
         loop
         muted
         playsInline
-        preload="auto"
+        preload="none"
         aria-hidden
         tabIndex={-1}
       />
