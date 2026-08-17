@@ -1,0 +1,184 @@
+@import "tailwindcss";
+
+:root {
+  /* Ink base — deep, with a violet undertone rather than neutral black */
+  --ink: #07060c;
+  --ink-raise: #0e0d16;
+  --ink-veil: #14121f;
+
+  /* Bone — warm off-white, never pure #fff */
+  --bone: #eceae4;
+  --bone-dim: #9d99ac;
+  --bone-faint: #625e73;
+
+  /* Journey spectrum: cold analytical -> warm human */
+  --s1: #45c8f0; /* Engineering  — cyan   */
+  --s2: #3ddcae; /* Metalabs     — mint   */
+  --s3: #f5c451; /* MBA          — amber  */
+  --s4: #fb8f4a; /* MAVIP        — orange */
+  --s5: #fb6f8d; /* Intellect    — rose   */
+
+  /* Live accent — retargeted as the journey progresses */
+  --accent: var(--s1);
+
+  /* MetaLabs is milestone 02, so the case study inherits its mint hue */
+  --ml-accent: var(--s2);
+
+  --hair: #ffffff14;
+  --hair-faint: #ffffff08;
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-ink-raise: var(--ink-raise);
+  --color-ink-veil: var(--ink-veil);
+  --color-bone: var(--bone);
+  --color-bone-dim: var(--bone-dim);
+  --color-bone-faint: var(--bone-faint);
+  --color-accent: var(--accent);
+  --color-ml-accent: var(--ml-accent);
+  --color-s1: var(--s1);
+  --color-s2: var(--s2);
+  --color-s3: var(--s3);
+  --color-s4: var(--s4);
+  --color-s5: var(--s5);
+  --color-hair: var(--hair);
+  --color-hair-faint: var(--hair-faint);
+  --font-display: var(--font-display);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+}
+
+/* The ink lives on <html> so it propagates to the viewport canvas. <body>
+   must stay transparent, otherwise it paints over the fixed z-index:-10
+   atmosphere layer. */
+html {
+  background: var(--ink);
+}
+
+body {
+  background: transparent;
+  color: var(--bone);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+body.cursor-hidden,
+body.cursor-hidden * {
+  cursor: none !important;
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display), Georgia, serif;
+  }
+  .font-mono {
+    font-family: var(--font-mono), ui-monospace, monospace;
+  }
+
+  /* Small-caps technical label used throughout the site */
+  .label {
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Fine rule that fades at both ends */
+  .rule-fade {
+    background: linear-gradient(
+      to right,
+      transparent,
+      var(--hair) 15%,
+      var(--hair) 85%,
+      transparent
+    );
+  }
+}
+
+/* Horizontal deck: stacked on mobile, translated horizontally from md up.
+   Driving the transform and the widths through custom properties means the
+   same markup serves both, with no JS branch and no hydration mismatch. */
+.deck-track,
+.deck-stage {
+  width: 100%;
+}
+.deck-track {
+  transform: none;
+}
+@media (min-width: 768px) {
+  .deck-track {
+    width: calc(var(--stages) * 100%);
+    transform: translate3d(var(--track-x, 0%), 0, 0);
+  }
+  .deck-stage {
+    width: calc(100% / var(--stages));
+  }
+}
+
+/* ── Motion ─────────────────────────────────────────────── */
+
+@keyframes veil-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(1.5%, -2%, 0) scale(1.06);
+  }
+}
+.animate-veil {
+  animation: veil-drift 24s ease-in-out infinite;
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  70%,
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+.animate-pulse-ring {
+  animation: pulse-ring 2.6s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-veil,
+  .animate-marquee,
+  .animate-pulse-ring {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ── Focus & selection ──────────────────────────────────── */
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--ink);
+}
