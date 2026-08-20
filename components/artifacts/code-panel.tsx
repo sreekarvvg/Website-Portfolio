@@ -95,8 +95,8 @@ function CodeBody({
   size: "sm" | "lg";
 }) {
   const lines = tokenize(code);
-  const text = size === "lg" ? "text-[13px]" : "text-[11px]";
-  const lead = size === "lg" ? "leading-[1.75]" : "leading-[1.6]";
+  const text = size === "lg" ? "text-[13px]" : "text-[10px]";
+  const lead = size === "lg" ? "leading-[1.7]" : "leading-[1.45]";
 
   return (
     <pre
@@ -108,7 +108,7 @@ function CodeBody({
           <span key={i} className="flex">
             <span
               aria-hidden
-              className="sticky left-0 mr-4 w-9 shrink-0 select-none bg-ink-raise/85 pr-2 text-right text-bone-faint/55"
+              className="sticky left-0 mr-3 w-7 shrink-0 select-none bg-ink-raise/85 pr-1.5 text-right text-bone-faint/55"
             >
               {startLine + i}
             </span>
@@ -191,7 +191,7 @@ export function CodePanel({
         {header}
 
         <div className="relative min-h-0 min-w-0 flex-1">
-          <div className="h-full min-w-0 overflow-auto p-3">
+          <div className="h-full min-w-0 overflow-auto p-2.5">
             <CodeBody code={code} startLine={startLine} size="sm" />
           </div>
           {/* Reads a part-line at the fold as an invitation to scroll rather

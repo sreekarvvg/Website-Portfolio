@@ -52,8 +52,13 @@ export function StageShip({ onRestart }: { onRestart: () => void }) {
                   sizes="20vw"
                   className="object-contain p-1.5 transition-transform duration-700 group-hover:scale-[1.03]"
                 />
-                <span className="label absolute bottom-2 left-2 text-bone opacity-0 transition-opacity group-hover:opacity-100">
-                  {a.caption}
+                <span className="absolute inset-x-0 bottom-0 flex items-center justify-between gap-2 bg-ink/80 px-2 py-1">
+                  <span className="label-sm min-w-0 truncate text-bone-dim">
+                    {a.caption}
+                  </span>
+                  <span aria-hidden className="label-sm shrink-0 text-ml-accent">
+                    ↗
+                  </span>
                 </span>
               </button>
             ))}

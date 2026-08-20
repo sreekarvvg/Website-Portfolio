@@ -17,6 +17,8 @@ export function MetaLabsSection() {
       eyebrow="Product Manager · Metalabs Technology"
       accent="var(--s2)"
       stages={[...stages]}
+      exploreLabel="Explore the journey"
+      exploreNote="6 stages — research, design, build, launch"
       backdrop={(stage) => <Film visible={stage === 0} />}
       panels={(goTo) => [
         <StageProduct key="p" />,

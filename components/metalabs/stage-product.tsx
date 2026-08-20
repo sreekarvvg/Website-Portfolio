@@ -23,7 +23,6 @@ export function StageProduct() {
           <span className="label" style={{ color: A }}>
             {meta.period}
           </span>
-          <span className="label-sm text-bone-faint">Case study 01</span>
         </div>
         <h2 className="font-display mt-3 text-[clamp(1.9rem,4vw,3.4rem)] leading-[1.02] tracking-[-0.025em] text-bone">
           Product Manager

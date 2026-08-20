@@ -19,7 +19,6 @@ export function StageIntro() {
           <span className="label" style={{ color: A }}>
             {intellectMeta.period}
           </span>
-          <span className="label-sm text-bone-faint">Case study 04</span>
         </div>
         <h2 className="font-display mt-3 text-[clamp(1.6rem,3.4vw,2.9rem)] leading-[1.03] tracking-[-0.025em] text-bone">
           AI Product · Strategy &amp; Commercialization
@@ -30,43 +29,43 @@ export function StageIntro() {
         </h2>
       </header>
 
-      <div className="mt-7 grid flex-1 grid-cols-1 gap-x-12 gap-y-8 lg:grid-cols-12">
+      <div className="mt-6 grid flex-1 grid-cols-1 gap-x-10 gap-y-6 lg:grid-cols-12">
         {/* ── Role, problem, solution ────────────── */}
         <div className="lg:col-span-7">
           <div className="border-l border-hair pl-4">
             <span className="label-sm text-bone-faint">My role</span>
-            <p className="mt-2 text-[13.5px] leading-[1.6] text-bone-dim">
+            <p className="mt-2 text-[13px] leading-[1.55] text-bone-dim">
               {intellectMeta.myRole}
             </p>
           </div>
 
-          <div className="mt-5 border-l border-hair pl-4">
+          <div className="mt-4 border-l border-hair pl-4">
             <span className="label-sm text-bone-faint">
               The problem I addressed
             </span>
-            <p className="mt-2 text-[13.5px] leading-[1.6] text-bone-dim">
+            <p className="mt-2 text-[13px] leading-[1.55] text-bone-dim">
               {intellectMeta.problem}
             </p>
           </div>
 
-          <div className="mt-5 border-l pl-4" style={{ borderColor: EDGE }}>
+          <div className="mt-4 border-l pl-4" style={{ borderColor: EDGE }}>
             <span className="label-sm" style={{ color: A }}>
               The solution
             </span>
-            <p className="mt-2 text-[13.5px] leading-[1.6] text-bone">
+            <p className="mt-2 text-[13px] leading-[1.55] text-bone">
               {intellectMeta.solution}
             </p>
           </div>
 
           {/* USHO, at a glance */}
-          <dl className="mt-6 grid grid-cols-2 gap-3 lg:grid-cols-4">
+          <dl className="mt-5 grid grid-cols-2 gap-2.5 lg:grid-cols-4">
             {usho.map((m) => (
               <div
                 key={m.letter}
-                className="border border-hair bg-ink-raise/60 p-3"
+                className="border border-hair bg-ink-raise/60 p-2.5"
               >
                 <span
-                  className="font-display text-2xl leading-none"
+                  className="font-display text-xl leading-none"
                   style={{ color: A }}
                 >
                   {m.letter}
@@ -79,13 +78,13 @@ export function StageIntro() {
             ))}
           </dl>
 
-          <dl className="mt-6 grid grid-cols-2 gap-x-8 gap-y-4 border-t border-hair pt-5">
+          <dl className="mt-5 grid grid-cols-2 gap-x-8 gap-y-4 border-t border-hair pt-4">
             {intellectMetrics.map((m) => (
               <div key={m.label}>
                 <dt className="sr-only">{m.label}</dt>
                 <dd>
                   <span
-                    className="font-display block text-[clamp(1.4rem,2.4vw,2.1rem)] leading-none"
+                    className="font-display block text-[clamp(1.3rem,2.1vw,1.85rem)] leading-none"
                     style={{ color: A }}
                   >
                     {m.value}
@@ -103,7 +102,6 @@ export function StageIntro() {
         <div className="flex flex-col lg:col-span-5">
           <div className="flex shrink-0 items-baseline justify-between gap-4">
             <span className="label-sm text-bone-faint">The deck</span>
-            <span className="label-sm text-bone-faint">Click to open</span>
           </div>
           <div className="mt-4 flex flex-1 flex-col">
             <DocCard doc={intellectDeck} accent={A} fill />
@@ -111,7 +109,7 @@ export function StageIntro() {
         </div>
       </div>
 
-      <div className="mt-7 shrink-0 border-t border-hair pt-5">
+      <div className="mt-5 shrink-0 border-t border-hair pt-3.5">
         <span className="label-sm text-bone-faint">Skills / keywords</span>
         <ul className="mt-3 flex flex-wrap gap-x-2 gap-y-2">
           {intellectSkills.map((s) => (

@@ -56,7 +56,9 @@ export function StageChapter({ chapter }: { chapter: IntellectChapter }) {
         <div className="flex min-w-0 flex-col md:min-h-0 lg:col-span-7">
           <div className="mb-3 flex shrink-0 items-baseline justify-between gap-4">
             <span className="label text-bone-faint">From the deck</span>
-            <span className="label text-bone-faint">Click to open</span>
+            <span className="label-sm text-bone-faint">
+              Click any slide to open the deck
+            </span>
           </div>
 
           {/* Three items: one full-width hero slide above a pair. Two items:
@@ -93,8 +95,17 @@ export function StageChapter({ chapter }: { chapter: IntellectChapter }) {
                   <span className="label shrink-0" style={{ color: ACCENT }}>
                     Slide {String(e.page).padStart(2, "0")}
                   </span>
-                  <span className="truncate text-[11px] leading-snug text-bone-dim">
+                  <span className="min-w-0 flex-1 truncate text-[11px] leading-snug text-bone-dim">
                     {e.caption}
+                  </span>
+                  {/* Standing cue, not hover-only — otherwise the tile reads
+                      as a picture rather than a way into the deck. */}
+                  <span
+                    aria-hidden
+                    className="label-sm shrink-0 transition-transform group-hover:translate-x-0.5"
+                    style={{ color: ACCENT }}
+                  >
+                    Open ↗
                   </span>
                 </span>
               </button>

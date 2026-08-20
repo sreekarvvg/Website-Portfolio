@@ -48,14 +48,14 @@ export function DocumentSlot({ doc }: { doc: DocSpec }) {
             <span className="block truncate font-display text-sm leading-tight text-bone">
               {doc.title}
             </span>
-            <span className="label mt-1 block text-bone-dim">
-              {doc.pages} pages
+            <span className="mt-1 flex items-baseline justify-between gap-2">
+              <span className="label-sm text-bone-dim">
+                {doc.pages} pages — click to read
+              </span>
+              <span className="label-sm shrink-0 text-ml-accent">Open ↗</span>
             </span>
           </span>
 
-          <span className="label pointer-events-none absolute top-2 right-2 rounded-full bg-ml-accent px-2.5 py-1 text-ink opacity-0 transition-opacity group-hover:opacity-100">
-            Read →
-          </span>
         </button>
       </div>
 

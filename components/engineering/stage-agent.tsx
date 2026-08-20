@@ -48,7 +48,7 @@ export function StageAgent() {
         </h3>
       </header>
 
-      <div className="mt-6 grid grid-cols-1 gap-8 md:min-h-0 md:flex-1 md:grid-rows-[minmax(0,1fr)] lg:grid-cols-12 lg:gap-10">
+      <div className="mt-5 grid grid-cols-1 gap-7 md:min-h-0 md:flex-1 md:grid-rows-[minmax(0,1fr)] lg:grid-cols-12 lg:gap-10">
         {/* ── The index, and the thinking ───────────── */}
         <div className="flex min-w-0 flex-col md:min-h-0 lg:col-span-5">
           <ol className="shrink-0 border-t border-hair">
@@ -60,7 +60,7 @@ export function StageAgent() {
                     type="button"
                     onClick={() => setAt(i)}
                     aria-current={on ? "true" : undefined}
-                    className="group flex w-full cursor-pointer items-baseline gap-3 border-b border-hair py-2 text-left"
+                    className="group flex w-full cursor-pointer items-baseline gap-3 border-b border-hair py-1.5 text-left"
                   >
                     <span
                       className="label shrink-0 transition-colors"
@@ -92,19 +92,19 @@ export function StageAgent() {
 
           <div
               key={proof.id}
-              className="fade-in mt-5 min-h-0 flex-1 border-l pl-5"
+              className="fade-in mt-4 min-h-0 flex-1 border-l pl-4"
               style={{ borderColor: EDGE }}
             >
               <h4 className="font-display text-balance text-lg leading-tight text-bone sm:text-xl">
                 {proof.title}
               </h4>
-              <p className="mt-2.5 max-w-xl text-[12.5px] leading-relaxed text-bone-dim">
+              <p className="mt-2 max-w-xl text-[12.5px] leading-[1.55] text-bone-dim">
                 {withCode(proof.body)}
               </p>
             </div>
 
           {/* What it actually runs on */}
-          <dl className="mt-5 hidden shrink-0 grid-cols-3 gap-x-5 gap-y-3.5 border-t border-hair pt-4 lg:grid">
+          <dl className="mt-4 hidden shrink-0 grid-cols-3 gap-x-5 gap-y-3 border-t border-hair pt-3.5 lg:grid">
             {engStack.map((s) => (
               <div key={s.role} className="min-w-0">
                 <dt className="label truncate text-bone-faint">{s.role}</dt>
@@ -118,15 +118,6 @@ export function StageAgent() {
 
         {/* ── The evidence ──────────────────────────── */}
         <div className="flex min-w-0 flex-col md:min-h-0 lg:col-span-7">
-          <div className="mb-2.5 flex shrink-0 items-baseline justify-between gap-4">
-            <span className="label text-bone-faint">From the source</span>
-            <span className="label tabular-nums text-bone-faint">
-              <span style={{ color: ACCENT }}>{proof.index}</span>
-              {" / "}
-              {String(codeProofs.length).padStart(2, "0")}
-            </span>
-          </div>
-
           {/* min-h on mobile so the excerpt is readable before the md switch */}
           <div className="flex min-h-[22rem] min-w-0 flex-col md:min-h-0 md:flex-1">
             <CodePanel

@@ -1,37 +1,64 @@
 import { milestones } from "@/lib/milestones";
 
 /**
- * The journey, compressed into a single row of links.
+ * The journey as a timeline, not a row of buttons.
  *
- * This replaces the full-height rail section: the same spectrum, the same
- * hue-per-milestone language and the same hover lift, at a size that fits in
- * the hero. Each pill is an anchor, so a click lands on the section itself and
- * the whole strip works with no JavaScript.
+ * A rail runs through five ticks in chronological order, each labelled with
+ * the year it starts. Reading it left to right is the point: a row of pills
+ * gave no sense of sequence, so nobody knew what they were for. Each tick is a
+ * plain anchor to its section, so the whole thing works without JavaScript.
  */
 export function MilestoneStrip() {
   return (
-    <nav aria-label="Journey" className="w-full">
-      <ol className="flex flex-wrap items-center gap-x-2 gap-y-2">
+    <nav aria-label="Journey timeline" className="w-full max-w-3xl">
+      <p className="label-sm mb-3 text-bone-faint">
+        The journey&nbsp;&nbsp;·&nbsp;&nbsp;2018 → 2026&nbsp;&nbsp;·&nbsp;&nbsp;
+        <span className="text-bone-dim">jump to any chapter</span>
+      </p>
+
+      <ol className="relative grid grid-cols-5">
+        {/* The rail, drawn behind the ticks and running the full width. */}
+        <span
+          aria-hidden
+          className="absolute top-[7px] left-[7px] h-px"
+          style={{
+            // Ends on the last tick rather than running off into empty space.
+            right: "calc(20% - 7px)",
+            background:
+              "linear-gradient(to right, var(--s1), var(--s2), var(--s3), var(--s4), var(--s5))",
+            opacity: 0.6,
+          }}
+        />
+
         {milestones.map((m) => (
-          <li key={m.id}>
+          <li key={m.id} className="relative">
             <a
               href={`#${m.id}`}
               title={`${m.role} · ${m.org} · ${m.period}`}
-              className="group flex items-center gap-2 rounded-full border border-hair bg-ink-raise/70 py-1.5 pr-3.5 pl-2.5 transition-colors hover:border-[color-mix(in_oklab,var(--pill)_55%,transparent)] hover:bg-[color-mix(in_oklab,var(--pill)_12%,transparent)]"
-              style={{ "--pill": m.hue } as React.CSSProperties}
+              className="group flex flex-col items-start pr-2"
+              style={{ "--tick": m.hue } as React.CSSProperties}
             >
-              <span
-                aria-hidden
-                className="h-1.5 w-1.5 shrink-0 rounded-full transition-transform group-hover:scale-150"
-                style={{ background: m.hue }}
-              />
-              <span
-                className="label-sm text-bone-faint transition-colors group-hover:text-[var(--pill)]"
-              >
-                {m.index}
+              {/* tick */}
+              <span className="relative flex h-3.5 w-3.5 items-center justify-center">
+                <span
+                  aria-hidden
+                  className="absolute h-3.5 w-3.5 rounded-full bg-ink"
+                />
+                <span
+                  aria-hidden
+                  className="relative h-[7px] w-[7px] rounded-full transition-transform duration-200 group-hover:scale-[1.7] group-focus-visible:scale-[1.7]"
+                  style={{ background: m.hue }}
+                />
               </span>
-              <span className="text-[12.5px] leading-none whitespace-nowrap text-bone-dim transition-colors group-hover:text-bone">
-                {m.org}
+
+              <span
+                className="label-sm mt-2.5 tabular-nums transition-colors group-hover:text-[var(--tick)]"
+                style={{ color: "var(--bone-dim)" }}
+              >
+                {m.year}
+              </span>
+              <span className="mt-1 text-[12px] leading-tight text-bone-faint transition-colors group-hover:text-bone">
+                {m.short}
               </span>
             </a>
           </li>

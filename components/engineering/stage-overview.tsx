@@ -1,5 +1,3 @@
-"use client";
-
 import {
   engAgents,
   engGoal,
@@ -12,7 +10,7 @@ const ACCENT = "var(--s1)";
 const EDGE = "color-mix(in oklab, var(--s1) 45%, transparent)";
 
 /** Slide 1 — where the habit started, and what it has produced. */
-export function StageOverview({ onExplore }: { onExplore: () => void }) {
+export function StageOverview() {
   return (
     <div className="flex flex-1 flex-col">
       <header className="shrink-0">
@@ -29,7 +27,7 @@ export function StageOverview({ onExplore }: { onExplore: () => void }) {
         <p className="label mt-3 text-bone-faint">{engMeta.period}</p>
       </header>
 
-      <div className="mt-7 grid grid-cols-1 gap-10 md:min-h-0 md:flex-1 md:grid-rows-[minmax(0,1fr)] lg:grid-cols-12 lg:gap-12">
+      <div className="mt-6 grid grid-cols-1 gap-8 md:min-h-0 md:flex-1 md:grid-rows-[minmax(0,1fr)] lg:grid-cols-12 lg:gap-12">
         {/* ── The habit ─────────────────────────────── */}
         <div className="flex min-w-0 flex-col md:min-h-0 lg:col-span-5">
           <blockquote
@@ -41,11 +39,11 @@ export function StageOverview({ onExplore }: { onExplore: () => void }) {
             </p>
           </blockquote>
 
-          <div className="mt-6 space-y-4">
+          <div className="mt-5 space-y-3">
             {engMeta.paragraphs.map((p, i) => (
               <p
                 key={i}
-                className="max-w-xl text-[13px] leading-relaxed text-bone-dim"
+                className="max-w-xl text-[12.5px] leading-[1.55] text-bone-dim"
               >
                 {p}
               </p>
@@ -70,11 +68,11 @@ export function StageOverview({ onExplore }: { onExplore: () => void }) {
         <div className="flex min-w-0 flex-col md:min-h-0 lg:col-span-7">
           <span className="label shrink-0 text-bone-faint">Selected work</span>
 
-          <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+          <div className="mt-3 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
             {engProjects.slice(0, 2).map((p) => (
               <article
                 key={p.id}
-                className="border border-hair bg-ink-raise/60 p-3.5"
+                className="border border-hair bg-ink-raise/60 p-3"
               >
                 <span className="label" style={{ color: ACCENT }}>
                   {p.index}
@@ -91,7 +89,7 @@ export function StageOverview({ onExplore }: { onExplore: () => void }) {
 
           {/* The current project, given the weight it deserves */}
           <article
-            className="mt-3 flex min-h-0 flex-col border bg-ink-raise/60 p-4 md:flex-1"
+            className="mt-2.5 flex min-h-0 flex-col border bg-ink-raise/60 p-3.5 md:flex-1"
             style={{ borderColor: EDGE }}
           >
             <div className="flex shrink-0 flex-wrap items-baseline gap-x-3 gap-y-1">
@@ -113,10 +111,10 @@ export function StageOverview({ onExplore }: { onExplore: () => void }) {
               {engProjects[2].body}
             </p>
 
-            <p className="label mt-4 shrink-0 text-bone-faint">
+            <p className="label-sm mt-3 shrink-0 text-bone-faint">
               A multi-agent research workflow
             </p>
-            <dl className="mt-3 grid grid-cols-2 gap-x-4 gap-y-3 sm:grid-cols-3">
+            <dl className="mt-2.5 grid grid-cols-2 gap-x-4 gap-y-2.5 sm:grid-cols-3">
               {engAgents.map((a) => (
                 <div
                   key={a.name}
@@ -132,33 +130,11 @@ export function StageOverview({ onExplore }: { onExplore: () => void }) {
               ))}
             </dl>
 
-            <p className="text-balance mt-auto max-w-2xl pt-4 text-[12px] leading-relaxed text-bone-dim italic">
+            <p className="text-balance mt-auto max-w-2xl pt-3 text-[12px] leading-relaxed text-bone-dim italic">
               {engGoal}
             </p>
           </article>
 
-          <button
-            type="button"
-            onClick={onExplore}
-            data-cursor
-            data-cursor-label="Go"
-            className="group mt-4 flex shrink-0 cursor-pointer items-center gap-4 text-left"
-          >
-            <span
-              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border transition-colors"
-              style={{ borderColor: EDGE, color: ACCENT }}
-            >
-              →
-            </span>
-            <span>
-              <span className="font-display block text-lg leading-none text-bone transition-colors group-hover:text-[var(--s1)]">
-                See how it is built
-              </span>
-              <span className="label mt-1.5 block text-bone-faint">
-                Six excerpts from the source
-              </span>
-            </span>
-          </button>
         </div>
       </div>
     </div>

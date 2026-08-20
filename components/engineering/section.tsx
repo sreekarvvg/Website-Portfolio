@@ -12,8 +12,10 @@ export function EngineeringSection() {
       eyebrow="Engineering / AI Lab @ VJTI"
       accent="var(--s1)"
       stages={engStages}
-      panels={(goTo) => [
-        <StageOverview key="overview" onExplore={() => goTo(1)} />,
+      exploreLabel="See how it is built"
+      exploreNote="6 excerpts from the source"
+      panels={() => [
+        <StageOverview key="overview" />,
         <StageAgent key="agent" />,
       ]}
     />

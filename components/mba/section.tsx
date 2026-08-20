@@ -16,7 +16,6 @@ export function MbaSection() {
             <span className="label" style={{ color: A }}>
               {mbaMeta.period}
             </span>
-            <span className="label-sm text-bone-faint">Case study 02</span>
           </div>
           <h2
             id="mba-heading"
@@ -73,7 +72,6 @@ export function MbaSection() {
           <div className="flex flex-col lg:col-span-7">
             <div className="flex shrink-0 items-baseline justify-between gap-4">
               <span className="label-sm text-bone-faint">Proof of work</span>
-              <span className="label-sm text-bone-faint">Click to read</span>
             </div>
             <div className="mt-4 grid flex-1 grid-cols-1 gap-6 sm:grid-cols-2">
               <DocCard doc={thoucentric} accent={A} fill />

@@ -54,10 +54,3 @@ export const sipDeck: ArtifactDoc = {
   pages: 15,
   dir: "/mavip/sip",
 };
-
-export const eventsBanner = {
-  id: "mavip-events",
-  title: "End-to-end event management",
-  caption: "Oracle × Mindware · Redington · GISEC · GII × Eureka",
-  src: "/mavip/events-banner.webp",
-};

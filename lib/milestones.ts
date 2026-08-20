@@ -1,62 +1,72 @@
 /**
- * The five milestones. They are the site's navigation: the strip in the hero
- * links straight to each section, so `id` must match the section element's id.
+ * The journey, in the order it happened.
+ *
+ * These drive the timeline in the hero, which is the site's navigation, so
+ * `id` must match the section element's id. Order here is chronological by
+ * start date — it is a timeline, not the page's section order.
  */
 export type Milestone = {
   id: string;
   index: string;
   role: string;
   org: string;
+  /** Short form for the timeline, where a column is ~90px wide. */
+  short: string;
+  /** The year the step starts — the timeline's tick label. */
+  year: string;
   period: string;
-  /** Two-word essence, used as the strip's hover caption. */
-  essence: string;
   hue: string;
 };
 
 export const milestones: Milestone[] = [
   {
-    id: "metalabs",
+    id: "engineering",
     index: "01",
+    role: "B.Tech · AI Lab",
+    org: "VJTI, Mumbai",
+    short: "VJTI",
+    year: "2018",
+    period: "2018 — 2022",
+    hue: "var(--s1)",
+  },
+  {
+    id: "metalabs",
+    index: "02",
     role: "Product Manager",
-    org: "Meta Labs Technology",
+    org: "Metalabs Technology",
+    short: "Metalabs",
+    year: "2022",
     period: "2022 — 2024",
-    essence: "Zero to One",
     hue: "var(--s2)",
   },
   {
     id: "mba",
-    index: "02",
+    index: "03",
     role: "MBA",
     org: "IMT Ghaziabad",
+    short: "IMT",
+    year: "2024",
     period: "2024 — 2026",
-    essence: "The Business Lens",
     hue: "var(--s3)",
   },
   {
     id: "mavip",
-    index: "03",
+    index: "04",
     role: "Strategy & Product Management Intern",
     org: "MAVIP Group",
+    short: "MAVIP",
+    year: "2025",
     period: "2025",
-    essence: "Concept to MVP",
     hue: "var(--s4)",
   },
   {
     id: "intellect",
-    index: "04",
+    index: "05",
     role: "AI Product · Strategy & Commercialization",
     org: "Intellect",
+    short: "Intellect",
+    year: "2026",
     period: "2026 — Present",
-    essence: "AI at Scale",
     hue: "var(--s5)",
-  },
-  {
-    id: "engineering",
-    index: "05",
-    role: "AI Lab",
-    org: "VJTI, Mumbai",
-    period: "2018 — 2022",
-    essence: "The Foundation",
-    hue: "var(--s1)",
   },
 ];

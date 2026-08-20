@@ -13,6 +13,7 @@ export function IntellectSection() {
       accent="var(--s5)"
       stages={intellectStages}
       exploreLabel="Read the deck explained"
+      exploreNote="3 chapters — the thinking behind the deck"
       panels={() => [
         <StageIntro key="intro" />,
         ...chapters.map((c) => <StageChapter key={c.id} chapter={c} />),

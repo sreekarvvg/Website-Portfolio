@@ -33,7 +33,7 @@ export function DocCard({
   const src = `${doc.dir}/p${String(page).padStart(2, "0")}.webp`;
 
   return (
-    <div className={`flex min-w-0 flex-col ${fill ? "min-h-0 flex-1" : ""}`}>
+    <div className={`group flex min-w-0 flex-col ${fill ? "min-h-0 flex-1" : ""}`}>
       <div className="mb-2 flex shrink-0 items-baseline justify-between gap-3">
         <span className="label-sm truncate" style={{ color: accent }}>
           {doc.org}
@@ -47,7 +47,7 @@ export function DocCard({
         type="button"
         onClick={() => setOpen(true)}
         aria-label={`Open ${doc.org} — ${doc.title}, ${doc.pages} page reader`}
-        className={`group relative w-full cursor-pointer overflow-hidden rounded-sm border border-hair bg-white transition-colors hover:border-[color-mix(in_oklab,var(--card-accent)_60%,transparent)] ${
+        className={`relative w-full cursor-pointer overflow-hidden rounded-sm border border-hair bg-white transition-colors group-hover:border-[color-mix(in_oklab,var(--card-accent)_60%,transparent)] ${
           fill ? "min-h-0 flex-1" : aspect
         }`}
         style={{ "--card-accent": accent } as React.CSSProperties}
@@ -59,18 +59,38 @@ export function DocCard({
           sizes="(max-width: 1024px) 92vw, 46vw"
           className="object-contain"
         />
-        <span
-          aria-hidden
-          className="absolute right-0 bottom-0 flex items-center gap-1.5 bg-ink/85 px-2.5 py-1.5 opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100"
-        >
-          <span className="label-sm" style={{ color: accent }}>
-            Open
+
+        {/* Paper edges: a visible hint that pages are stacked behind. */}
+        {doc.pages > 1 ? (
+          <span aria-hidden className="pointer-events-none absolute inset-y-3 right-0 flex gap-[3px]">
+            <span className="w-[3px] rounded-l-sm bg-white/25" />
+            <span className="w-[3px] rounded-l-sm bg-white/15" />
           </span>
-          <span className="text-[11px] text-bone-dim">↗</span>
-        </span>
+        ) : null}
       </button>
 
-      <div className="mt-2.5 shrink-0">
+      {/* The cue sits under the artwork, not over it: an overlay covered the
+          bottom of every slide. Always visible — without a standing cue nobody
+          knows the document opens or that pages sit behind it. */}
+      <span
+        aria-hidden
+        className="mt-2 flex shrink-0 items-center justify-between gap-3 border px-2.5 py-1.5 transition-colors group-hover:bg-[color-mix(in_oklab,var(--card-accent)_10%,transparent)]"
+        style={{
+          borderColor: "color-mix(in oklab, var(--card-accent) 35%, transparent)",
+          "--card-accent": accent,
+        } as React.CSSProperties}
+      >
+        <span className="label-sm text-bone-dim">
+          {doc.pages > 1
+            ? `${doc.pages} pages — click to read`
+            : "Click to enlarge"}
+        </span>
+        <span className="label-sm flex items-center gap-1.5" style={{ color: accent }}>
+          Open <span className="text-[11px]">↗</span>
+        </span>
+      </span>
+
+      <div className="mt-2 shrink-0">
         <p className="text-[13px] leading-tight text-bone">{doc.title}</p>
         <p className="label-sm mt-1 text-bone-faint">{doc.meta}</p>
       </div>

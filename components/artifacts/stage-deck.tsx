@@ -26,6 +26,7 @@ export function StageDeck({
   stages,
   panels,
   exploreLabel = "Explore the journey",
+  exploreNote,
   backdrop,
 }: {
   id: string;
@@ -34,6 +35,8 @@ export function StageDeck({
   stages: DeckStage[];
   panels: (goTo: (i: number) => void) => ReactNode[];
   exploreLabel?: string;
+  /** Line under the invitation; defaults to the stage count. */
+  exploreNote?: string;
   /** Full-bleed layer behind the stage, e.g. a film. Receives the stage index
    *  so it can appear only where it belongs. */
   backdrop?: (stage: number) => ReactNode;
@@ -76,34 +79,49 @@ export function StageDeck({
         </div>
 
         {/* ── Controls: in flow, never over the content ── */}
-        <nav
-          aria-label={`${eyebrow} stages`}
-          className="mt-7 flex shrink-0 flex-wrap items-center justify-between gap-x-6 gap-y-3 border-t border-hair pt-4"
-        >
-          {atStart ? (
-            <button
-              type="button"
-              onClick={() => goTo(1)}
-              className="group flex cursor-pointer items-center gap-3"
-            >
+        {/* On the opening panel the way in is a full-width bar, not a line of
+            small print. It was being missed entirely. */}
+        {atStart ? (
+          <button
+            type="button"
+            onClick={() => goTo(1)}
+            aria-label={`${exploreLabel} — ${count} stages`}
+            className="group mt-7 flex w-full shrink-0 cursor-pointer items-center justify-between gap-6 border px-5 py-5 transition-colors sm:px-7"
+            style={{
+              borderColor:
+                "color-mix(in oklab, var(--deck-accent) 45%, transparent)",
+              background:
+                "color-mix(in oklab, var(--deck-accent) 7%, transparent)",
+            }}
+          >
+            <span className="flex min-w-0 flex-col items-start text-left">
               <span
-                className="font-display text-base leading-none transition-colors sm:text-lg"
+                className="font-display text-[clamp(1.15rem,2.2vw,1.75rem)] leading-none"
                 style={{ color: accent }}
               >
                 {exploreLabel}
               </span>
-              <span className="label-sm text-bone-faint">
-                {count - 1} more · optional
+              <span className="label-sm mt-2 text-bone-dim">
+                {exploreNote ?? `${count} stages to walk through`}
               </span>
-              <span
-                aria-hidden
-                className="transition-transform group-hover:translate-x-1"
-                style={{ color: accent }}
-              >
-                →
-              </span>
-            </button>
-          ) : (
+            </span>
+            <span
+              aria-hidden
+              className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border text-lg transition-transform group-hover:translate-x-1 sm:h-14 sm:w-14"
+              style={{
+                borderColor:
+                  "color-mix(in oklab, var(--deck-accent) 55%, transparent)",
+                color: accent,
+              }}
+            >
+              →
+            </span>
+          </button>
+        ) : (
+          <nav
+            aria-label={`${eyebrow} stages`}
+            className="mt-7 flex shrink-0 flex-wrap items-center justify-between gap-x-6 gap-y-3 border-t border-hair pt-4"
+          >
             <ol className="flex min-w-0 flex-wrap items-center gap-x-1 gap-y-1">
               {stages.map((s, i) => {
                 const on = i === stage;
@@ -140,9 +158,8 @@ export function StageDeck({
                 );
               })}
             </ol>
-          )}
 
-          <div className="flex shrink-0 items-center gap-2">
+            <div className="flex shrink-0 items-center gap-2">
             <span className="label-sm mr-1 tabular-nums text-bone-faint">
               <span style={{ color: accent }}>
                 {String(stage + 1).padStart(2, "0")}
@@ -173,8 +190,9 @@ export function StageDeck({
             >
               →
             </button>
-          </div>
-        </nav>
+            </div>
+          </nav>
+        )}
       </div>
 
       <p className="sr-only" aria-live="polite">

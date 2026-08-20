@@ -14,11 +14,11 @@ export const intellectMeta = {
   unit: "CCO Office",
   org: "Intellect",
   myRole:
-    "I work closely with Product, Sales, Pre-Sales, Delivery and senior leadership to shape opportunities for enterprise AI and BFSI products — from understanding customer requirements and building product propositions to designing pricing, ROI models and commercialization frameworks.",
+    "I work with Product, Sales, Pre-Sales, Delivery and senior leadership to shape enterprise AI and BFSI opportunities — from customer requirements and product propositions through to pricing, ROI models and commercialization frameworks.",
   problem:
-    "Enterprise AI was evolving faster than the way it was being priced, packaged and commercialized — making it difficult to consistently translate AI capabilities into clear customer value, ROI and commercial propositions.",
+    "Enterprise AI was evolving faster than the way it was priced and packaged — making it hard to turn AI capability into clear customer value, ROI and a commercial proposition.",
   solution:
-    "I helped build a structured commercialization approach through the USHO framework — combining AI economics, pricing, licensing and value realization into a repeatable model. I also built 4 license calculators to simplify complex AI costing and make commercial decisions faster, clearer and more consistent.",
+    "A structured commercialization approach built on the USHO framework — AI economics, pricing, licensing and value realization in one repeatable model — plus 4 license calculators that make complex AI costing fast and consistent.",
 } as const;
 
 export const intellectMetrics = [
