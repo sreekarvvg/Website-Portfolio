@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { motion } from "framer-motion";
 import { collection, collectionSteps, pipeline } from "@/lib/metalabs";
 import { Lightbox } from "./lightbox";
 
@@ -10,7 +9,7 @@ export function StageShip({ onRestart }: { onRestart: () => void }) {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <div className="flex w-full flex-col px-6 pt-20 pb-28 sm:px-10 md:h-full md:pt-24 md:pb-24 lg:px-16">
+    <div className="flex flex-1 flex-col">
       <header className="shrink-0">
         <span className="label text-ml-accent">06 — Ship &amp; Scale</span>
         <p className="mt-4 max-w-3xl text-balance text-base leading-[1.55] text-bone-dim sm:text-lg">
@@ -37,16 +36,12 @@ export function StageShip({ onRestart }: { onRestart: () => void }) {
 
           <div className="mt-4 grid aspect-[3/1] grid-cols-3 gap-3 md:aspect-auto md:min-h-0 md:flex-1">
             {collection.map((a, i) => (
-              <motion.button
+              <button
                 key={a.src}
                 type="button"
                 onClick={() => setOpen(i)}
                 data-cursor
                 data-cursor-label="View"
-                initial={{ opacity: 0, y: 14 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.55, delay: i * 0.09 }}
                 aria-label={`Enlarge ${a.caption}`}
                 className="group relative cursor-pointer overflow-hidden border border-hair bg-ink-raise"
               >
@@ -60,7 +55,7 @@ export function StageShip({ onRestart }: { onRestart: () => void }) {
                 <span className="label absolute bottom-2 left-2 text-bone opacity-0 transition-opacity group-hover:opacity-100">
                   {a.caption}
                 </span>
-              </motion.button>
+              </button>
             ))}
           </div>
 
@@ -74,17 +69,13 @@ export function StageShip({ onRestart }: { onRestart: () => void }) {
         </div>
 
         {/* ── Pipeline + artifact ──────────────────── */}
-        <div className="flex min-h-0 flex-col gap-5 overflow-auto lg:col-span-7">
+        <div className="flex flex-col gap-4 lg:col-span-7">
           <div>
             <span className="label text-bone-faint">Asset pipeline</span>
             <ol className="mt-3 flex flex-wrap items-center gap-x-1.5 gap-y-2">
               {pipeline.map((p, i) => (
-                <motion.li
+                <li
                   key={p}
-                  initial={{ opacity: 0, y: 8 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: i * 0.06 }}
                   className="flex items-center gap-1.5"
                 >
                   <span className="label border border-hair px-2.5 py-1.5 text-bone">
@@ -93,7 +84,7 @@ export function StageShip({ onRestart }: { onRestart: () => void }) {
                   {i < pipeline.length - 1 && (
                     <span className="text-ml-accent">→</span>
                   )}
-                </motion.li>
+                </li>
               ))}
             </ol>
           </div>

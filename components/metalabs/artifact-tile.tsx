@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
 import type { Artifact } from "@/lib/metalabs";
 
 /**
@@ -12,24 +11,18 @@ import type { Artifact } from "@/lib/metalabs";
 export function ArtifactTile({
   artifact,
   onOpen,
-  index = 0,
   className = "",
 }: {
   artifact: Artifact;
   onOpen: () => void;
-  index?: number;
   className?: string;
 }) {
   return (
-    <motion.button
+    <button
       type="button"
       onClick={onOpen}
       data-cursor
       data-cursor-label="View"
-      initial={{ opacity: 0, scale: 0.97 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
       aria-label={`Enlarge: ${artifact.caption}`}
       className={`group flex cursor-pointer flex-col overflow-hidden border border-hair bg-ink-raise transition-colors hover:border-ml-accent/50 ${className}`}
     >
@@ -48,6 +41,6 @@ export function ArtifactTile({
           {artifact.caption}
         </span>
       </span>
-    </motion.button>
+    </button>
   );
 }

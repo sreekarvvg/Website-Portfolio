@@ -37,14 +37,14 @@ export const metadata: Metadata = {
     type: "profile",
     siteName: `${site.name} — Portfolio`,
     title: `${site.name} — ${site.role}`,
-    description: site.tagline,
+    description: site.role,
     url: site.url,
     locale: "en_IN",
   },
   twitter: {
     card: "summary_large_image",
     title: `${site.name} — ${site.role}`,
-    description: site.tagline,
+    description: site.role,
   },
   robots: {
     index: true,

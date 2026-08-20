@@ -19,25 +19,56 @@ export const stages = [
 
 /* ── Stage 01 ─────────────────────────────────────────── */
 
-export const headlineMetrics = [
-  { value: "10.5K+", label: "Twitter Followers" },
-  { value: "2.5K+", label: "Discord Members" },
-  { value: "7,000+", label: "Digital Assets Generated" },
-  { value: "XX", label: "[Metric to be added]", pending: true },
-  { value: "XX", label: "[Metric to be added]", pending: true },
-  { value: "XX", label: "[Metric to be added]", pending: true },
-] as const;
+export const meta = {
+  period: "2022 — 2024",
+  role: "Product Manager",
+  org: "Metalabs Technology",
+} as const;
 
 export const theIdea =
-  "The CEO envisioned an open-world game blending blockchain, AR, VR and Unity — connecting real and virtual worlds, enabling play-to-earn, and allowing digital assets to move across games.";
+  "Build a new gaming ecosystem blending blockchain, AR, VR and Unity — connecting gameplay, digital ownership and real-world experiences.";
+
+export const theSolution =
+  "An open-world gaming ecosystem combining gameplay, digital assets, rewards, virtual worlds, AR experiences and real-world utility.";
+
+export const headlineMetrics = [
+  { value: "4 → 15", label: "Team scaled across product & development" },
+  { value: "80%", label: "Development efficiency improved" },
+  { value: "10.5K+", label: "Community built in 4 weeks" },
+  { value: "7,000+", label: "Digital assets generated, validated & sold" },
+] as const;
+
+export const myRole =
+  "I wore many hats here — Product Manager, builder, researcher, sales and growth operator. I took ideas from ambiguity to execution, worked closely with technical and creative teams, and stayed involved from discovery and product strategy through design, development, launch and iteration. It taught me to think like a PM who doesn't just define what should be built, but gets close enough to the work to make it happen.";
 
 export const collaboration = [
   "Product",
+  "Engineering & Development",
   "Design",
   "Art",
-  "Development",
   "Marketing",
-  "Community",
+  "Growth & Community",
+] as const;
+
+export const skills = [
+  "Product Strategy",
+  "Product Discovery",
+  "User Research",
+  "Competitive Analysis",
+  "Roadmapping",
+  "PRDs",
+  "MVP Development",
+  "Agile / Scrum",
+  "Prioritization",
+  "Product Design",
+  "User Experience",
+  "Stakeholder Management",
+  "Cross-functional Leadership",
+  "Growth Strategy",
+  "GTM",
+  "Product Analytics",
+  "Automation",
+  "Technical Product Management",
 ] as const;
 
 /* ── Stage 02 ─────────────────────────────────────────── */
@@ -48,14 +79,11 @@ export const personaPages = Array.from(
   (_, i) => `/metalabs/personas/p${String(i + 1).padStart(2, "0")}.webp`,
 );
 
-export const researchMetrics = [
+/** The two figures that carry the stage, kept together rather than split
+ *  across two panels — the rest of the room belongs to the competitor table. */
+export const understandMetrics = [
   { value: "9", label: "Audience Personas" },
-  { value: "XX%", label: "[Research metric]", pending: true },
-] as const;
-
-export const competitiveMetrics = [
   { value: "30+", label: "Competitors Researched" },
-  { value: "XX", label: "[Market / competitor metric]", pending: true },
 ] as const;
 
 export type Competitor = {

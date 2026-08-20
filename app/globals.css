@@ -12,20 +12,20 @@
   --bone-faint: #625e73;
 
   /* Journey spectrum: cold analytical -> warm human */
-  --s1: #45c8f0; /* Engineering  — cyan   */
+  --s1: #45c8f0; /* AI Lab       — cyan   */
   --s2: #3ddcae; /* Metalabs     — mint   */
   --s3: #f5c451; /* MBA          — amber  */
   --s4: #fb8f4a; /* MAVIP        — orange */
   --s5: #fb6f8d; /* Intellect    — rose   */
 
-  /* Live accent — retargeted as the journey progresses */
-  --accent: var(--s1);
-
-  /* MetaLabs is milestone 02, so the case study inherits its mint hue */
+  --accent: var(--s4);
   --ml-accent: var(--s2);
 
   --hair: #ffffff14;
   --hair-faint: #ffffff08;
+
+  /* Height of the sticky header, used for scroll offsets and layout */
+  --header-h: 4.25rem;
 }
 
 @theme inline {
@@ -49,23 +49,45 @@
   --font-mono: var(--font-mono);
 }
 
-/* The ink lives on <html> so it propagates to the viewport canvas. <body>
-   must stay transparent, otherwise it paints over the fixed z-index:-10
-   atmosphere layer. */
 html {
   background: var(--ink);
+  /* Native smooth scrolling. No scroll library runs on this page: a permanent
+     rAF loop costs frames on every scroll and breaks scrolling inside nested
+     regions, which is exactly what a deck of slides needs to work. */
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--header-h);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 body {
-  background: transparent;
+  /* One static gradient field. The previous animated canvas repainted every
+     frame for a texture nobody can consciously see. */
+  background:
+    radial-gradient(
+      70rem 40rem at 12% -8%,
+      color-mix(in oklab, var(--s1) 12%, transparent),
+      transparent 60%
+    ),
+    radial-gradient(
+      60rem 45rem at 96% 18%,
+      color-mix(in oklab, var(--s5) 10%, transparent),
+      transparent 62%
+    ),
+    radial-gradient(
+      70rem 50rem at 50% 108%,
+      color-mix(in oklab, var(--s4) 9%, transparent),
+      transparent 60%
+    ),
+    var(--ink);
+  background-attachment: fixed;
   color: var(--bone);
   font-family: var(--font-sans), system-ui, sans-serif;
   overflow-x: hidden;
-}
-
-body.cursor-hidden,
-body.cursor-hidden * {
-  cursor: none !important;
 }
 
 @layer utilities {
@@ -80,7 +102,13 @@ body.cursor-hidden * {
   .label {
     font-family: var(--font-mono), ui-monospace, monospace;
     font-size: 0.6875rem;
-    letter-spacing: 0.28em;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+  }
+  .label-sm {
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: 0.625rem;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
   }
 
@@ -88,85 +116,39 @@ body.cursor-hidden * {
     text-wrap: balance;
   }
 
-  /* Fine rule that fades at both ends */
-  .rule-fade {
-    background: linear-gradient(
-      to right,
-      transparent,
-      var(--hair) 15%,
-      var(--hair) 85%,
-      transparent
-    );
+  /* The one piece of motion that carries meaning: a slide replacing another. */
+  .stage-in {
+    animation: stage-in 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .fade-in {
+    animation: fade-in 200ms ease-out both;
   }
 }
 
-/* Horizontal deck: stacked on mobile, translated horizontally from md up.
-   Driving the transform and the widths through custom properties means the
-   same markup serves both, with no JS branch and no hydration mismatch. */
-.deck-track,
-.deck-stage {
-  width: 100%;
-}
-.deck-track {
-  transform: none;
-}
-@media (min-width: 768px) {
-  .deck-track {
-    width: calc(var(--stages) * 100%);
-    transform: translate3d(var(--track-x, 0%), 0, 0);
+@keyframes stage-in {
+  from {
+    opacity: 0;
+    transform: translate3d(1.25rem, 0, 0);
   }
-  .deck-stage {
-    width: calc(100% / var(--stages));
-  }
-}
-
-/* ── Motion ─────────────────────────────────────────────── */
-
-@keyframes veil-drift {
-  0%,
-  100% {
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-  50% {
-    transform: translate3d(1.5%, -2%, 0) scale(1.06);
-  }
-}
-.animate-veil {
-  animation: veil-drift 24s ease-in-out infinite;
-}
-
-@keyframes marquee {
   to {
-    transform: translateX(-50%);
+    opacity: 1;
+    transform: none;
   }
-}
-.animate-marquee {
-  animation: marquee 40s linear infinite;
 }
 
-@keyframes pulse-ring {
-  0% {
-    transform: scale(1);
-    opacity: 0.6;
-  }
-  70%,
-  100% {
-    transform: scale(2.4);
+@keyframes fade-in {
+  from {
     opacity: 0;
   }
-}
-.animate-pulse-ring {
-  animation: pulse-ring 2.6s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  to {
+    opacity: 1;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .animate-veil,
-  .animate-marquee,
-  .animate-pulse-ring {
+  .stage-in,
+  .fade-in {
     animation: none;
-  }
-  html {
-    scroll-behavior: auto;
   }
 }
 

@@ -1,38 +1,63 @@
 import type { ArtifactDoc } from "./artifacts";
 
-/**
- * MAVIP — milestone 04, carrying the spectrum's orange hue.
- * Artifacts come from the `MAVIP` branch.
- */
-
 export const mavipMeta = {
-  period: "2025–2026",
-  lede: "Led complete development of quotnt — The Founders' Quotient, defining product strategy, multi-stakeholder GTM, UI/UX, platform architecture and launch requirements; collaborated with developers and designers to deliver a launch-ready MVP in 6 months.",
-  events:
-    "Directed end-to-end delivery of 5 large-scale tech events (Oracle × Mindware, Redington, GISEC outreach, GII × Eureka).",
+  period: "2025",
+  role: "Strategy & Product Management Intern",
+  org: "MAVIP Group",
+  product: "quotnt — The Founders' Quotient",
+  summary:
+    "Turn an idea for a founder-focused platform into a product people could actually use. Led quotnt from product strategy to launch-ready MVP — shaping the product, UI/UX, platform architecture, GTM and launch requirements.",
+  myRole:
+    "I worked across product, strategy and execution, collaborating with international clients, partners and diverse teams across cultures and backgrounds. Working with people from different markets and perspectives taught me to adapt quickly, communicate with empathy, and shape solutions that work beyond a single context.",
 } as const;
 
 export const mavipMetrics = [
-  { value: ">$100K", label: "Budget managed" },
-  { value: "20+", label: "Stakeholders" },
-  { value: "95%+", label: "Satisfaction from partners" },
+  { value: "6 months", label: "Concept → launch-ready MVP" },
+  { value: "5", label: "Large-scale technology events" },
+  { value: "20+", label: "Stakeholders coordinated" },
+  { value: "$100K+", label: "Budgets managed" },
+  { value: "95%+", label: "Partner satisfaction" },
 ] as const;
 
-/** The Summer Internship deck — the detailed work proof. */
+export const mavipTeams = [
+  "Product",
+  "Design",
+  "Engineering",
+  "Marketing",
+  "Sales",
+  "Vendors",
+  "Partners",
+  "Leadership",
+] as const;
+
+export const mavipSkills = [
+  "Product Strategy",
+  "Product Discovery",
+  "UI/UX",
+  "MVP Development",
+  "GTM",
+  "Stakeholder Management",
+  "Project Management",
+  "Market Research",
+  "Competitive Analysis",
+  "Vendor Management",
+  "Event Strategy",
+  "Business Development",
+  "Execution",
+] as const;
+
 export const sipDeck: ArtifactDoc = {
-  id: "sip",
-  org: "quotnt",
+  id: "mavip-sip",
+  org: "MAVIP",
   title: "Summer Internship Presentation",
-  meta: "Product strategy · GTM · UI/UX · Platform",
+  meta: "Product Strategy · GTM · UI/UX · Platform",
   pages: 15,
   dir: "/mavip/sip",
 };
 
 export const eventsBanner = {
-  src: "/mavip/events-banner.webp",
-  w: 1800,
-  h: 1074,
-  org: "Events",
+  id: "mavip-events",
   title: "End-to-end event management",
-  meta: "Oracle × Mindware · Redington · GISEC · GII × Eureka",
+  caption: "Oracle × Mindware · Redington · GISEC · GII × Eureka",
+  src: "/mavip/events-banner.webp",
 };

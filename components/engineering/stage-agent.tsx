@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 import { codeProofs, engStack } from "@/lib/engineering";
 import { CodePanel } from "@/components/artifacts/code-panel";
 
@@ -34,7 +33,7 @@ export function StageAgent() {
   const proof = codeProofs[at];
 
   return (
-    <div className="flex w-full flex-col px-6 pt-20 pb-28 sm:px-10 md:h-full md:pt-24 md:pb-24 lg:px-16">
+    <div className="flex flex-1 flex-col">
       <header className="shrink-0">
         <div className="flex flex-wrap items-baseline gap-x-5 gap-y-1">
           <span className="label" style={{ color: ACCENT }}>
@@ -91,14 +90,9 @@ export function StageAgent() {
             })}
           </ol>
 
-          <AnimatePresence mode="wait">
-            <motion.div
+          <div
               key={proof.id}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -6 }}
-              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="mt-5 min-h-0 flex-1 border-l pl-5"
+              className="fade-in mt-5 min-h-0 flex-1 border-l pl-5"
               style={{ borderColor: EDGE }}
             >
               <h4 className="font-display text-balance text-lg leading-tight text-bone sm:text-xl">
@@ -107,8 +101,7 @@ export function StageAgent() {
               <p className="mt-2.5 max-w-xl text-[12.5px] leading-relaxed text-bone-dim">
                 {withCode(proof.body)}
               </p>
-            </motion.div>
-          </AnimatePresence>
+            </div>
 
           {/* What it actually runs on */}
           <dl className="mt-5 hidden shrink-0 grid-cols-3 gap-x-5 gap-y-3.5 border-t border-hair pt-4 lg:grid">

@@ -1,10 +1,9 @@
 /**
- * Canonical site identity — used by metadata, the sitemap, robots and the
- * social preview card.
+ * Identity, contact and the copy that introduces the site.
  *
- * The URL resolves in three steps so the same build is correct everywhere:
- * an explicit NEXT_PUBLIC_SITE_URL wins (set this once a custom domain is
- * attached), otherwise Vercel's production domain, otherwise localhost.
+ * The URL resolves in three steps so one build is correct everywhere: an
+ * explicit NEXT_PUBLIC_SITE_URL wins, then the deployment domain, then
+ * localhost.
  */
 
 function resolveUrl(): string {
@@ -21,18 +20,20 @@ export const site = {
   url: resolveUrl(),
   name: "Sai Sreekar VVG",
   shortName: "Sreekar",
-  role: "Product Manager",
-  /** Written for a recruiter skimming a search result or a shared link. */
-  tagline: "Product Manager — AI commercialization, product strategy and 0→1",
+  /** The positioning line under the name, and in the header. */
+  role: "AI Product • Strategy & Commercialization",
+  headerTag: "Product × Technology × Business × AI",
+  about:
+    "I have always had an itch to understand how things work, and build them better. From 10+ projects and 0→1 products to MVP launches and $100K+ growth campaigns, I have learned by doing. Today, I work across AI, enterprise products, and commercialization, bringing together technology, business, and product thinking to solve complex problems and create meaningful impact. Wherever I work, I look beyond the role to find ways to build, improve, and make things better.",
   description:
-    "Product management professional with ~3 years across AI commercialization, product strategy, growth and enterprise solutions. Case studies from Intellect Design Arena, Meta Labs Technology, MAVIP Group and IMT Ghaziabad, plus engineering and multi-agent AI work.",
+    "AI Product, Strategy & Commercialization. Case studies across enterprise AI at Intellect Design Arena, 0→1 product at Meta Labs Technology, MAVIP Group, IMT Ghaziabad and VJTI Mumbai.",
   email: "sreekarvvg2000@gmail.com",
-  /** Served from public/ so the link never depends on a branch or a viewer. */
-  cv: "/Sai-Sreekar-VVG-Product-Management.pdf",
   linkedin: "https://linkedin.com/in/sreekarvvg",
   github: "https://github.com/sreekarvvg",
+  cv: "/Sai-Sreekar-VVG-Product-Management.pdf",
   keywords: [
     "Sai Sreekar VVG",
+    "AI Product",
     "Product Manager",
     "AI Commercialization",
     "Product Strategy",
@@ -41,10 +42,7 @@ export const site = {
     "Enterprise AI",
     "BFSI",
     "0 to 1 Product",
-    "Multi-Agent Systems",
-    "LangGraph",
     "IMT Ghaziabad",
     "VJTI Mumbai",
-    "Product Management Portfolio",
   ],
 } as const;

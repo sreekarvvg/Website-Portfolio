@@ -1,57 +1,72 @@
 import type { ArtifactDoc } from "./artifacts";
 
-/**
- * MBA — IMT Ghaziabad, 2024–2026. Milestone 03, so this section carries the
- * spectrum's amber hue. Artifacts come from the `MBA` branch.
- */
-
 export const mbaMeta = {
+  period: "2024 — 2026",
+  degree: "MBA",
   school: "IMT Ghaziabad",
-  period: "2024–2026",
-  standing: "Top 1% of the cohort academically",
-  journey:
-    "My MBA turned business theory into real-world problem solving — through case competitions, international exposure, and an internship in the UAE.",
+  standing: "Top 10%",
+  standingNote: "of the cohort academically",
+  summary:
+    "An MBA that took me beyond building products — into strategy, business, markets and people. Spent 1 year in Dubai, gaining international exposure and learning alongside leaders, entrepreneurs and professionals from across the world.",
+  positioning:
+    "My MBA added the business lens to my builder mindset — helping me understand not just what to build, but why it matters, how it creates value, and how to make it work at scale.",
 } as const;
 
-export const lessons = [
+export const pillars = [
   {
     index: "01",
-    title: "Think in systems",
-    body: "Business problems rarely exist in isolation. Strategy requires connecting customers, markets, competition, operations and economics before deciding what to do.",
+    title: "Case Competitions",
+    body: "Applied strategy, problem-solving and product thinking to real business problems.",
   },
   {
     index: "02",
-    title: "Turn insight into action",
-    body: "Research is only valuable when it changes a decision. Case competitions taught me to move quickly from ambiguous information to a clear, defensible strategy.",
+    title: "Global Exposure",
+    body: "Dubai-based experience with diverse teams, leaders, markets and perspectives.",
   },
   {
     index: "03",
-    title: "Think globally",
-    body: "Working across different markets and cultures showed me that the same product, strategy or message cannot simply be copied from one market to another.",
+    title: "Leadership Immersion",
+    body: "Interactions with business leaders, entrepreneurs and professionals from around the world.",
   },
   {
     index: "04",
-    title: "Balance data with judgement",
-    body: "Strong decisions need both analytical evidence and the ability to make trade-offs when information is incomplete.",
+    title: "Business Thinking",
+    body: "Strategy · Finance · Marketing · Operations · Analytics · Leadership",
   },
 ] as const;
 
-/** Single-page winning solution — shown as one document card. */
+export const mbaSkills = [
+  "Business Strategy",
+  "Product Strategy",
+  "Market Research",
+  "Consumer Behaviour",
+  "Marketing",
+  "GTM",
+  "Pricing",
+  "Financial Analysis",
+  "Business Models",
+  "Competitive Strategy",
+  "Data Analysis",
+  "Leadership",
+  "Negotiation",
+  "Problem Solving",
+  "Storytelling",
+] as const;
+
 export const thoucentric: ArtifactDoc = {
   id: "thoucentric",
   org: "Thoucentric",
   title: "Management Consulting Case Competition",
-  meta: "Winning solution · Colorico Paints",
+  meta: "Winning Solution · Colorico Paints",
   pages: 1,
   dir: "/mba/thoucentric",
 };
 
-/** Three-page deck — shown as an auto-cycling stack. */
 export const loreal: ArtifactDoc = {
   id: "loreal",
   org: "L'Oréal",
   title: "Product Discovery & Innovation",
-  meta: "Case competition · Plumeo by In-Scentive",
+  meta: "Case Competition · Plumeo by In-Scentive",
   pages: 3,
   dir: "/mba/loreal",
 };

@@ -1,125 +1,104 @@
-"use client";
+import { loreal, mbaMeta, mbaSkills, pillars, thoucentric } from "@/lib/mba";
+import { DocCard } from "@/components/artifacts/doc-card";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { lessons, loreal, mbaMeta, thoucentric } from "@/lib/mba";
-import { PageStack } from "@/components/artifacts/page-stack";
-import { SingleDocCard } from "@/components/artifacts/single-doc-card";
+const A = "var(--s3)";
 
-const ACCENT = "var(--s3)"; // milestone 03 — amber
-
-/** MBA — a single, self-contained panel in the continuous journey. */
 export function MbaSection() {
-  const ref = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "start center"],
-  });
-  const headY = useTransform(scrollYProgress, [0, 1], [50, 0]);
-
   return (
     <section
-      ref={ref}
       id="mba"
       aria-labelledby="mba-heading"
-      className="relative flex min-h-svh w-full flex-col overflow-x-clip px-6 py-24 sm:px-10 lg:px-16"
+      className="w-full overflow-x-clip"
     >
-      {/* ── Header ─────────────────────────────────── */}
-      <motion.header style={{ y: headY }} className="shrink-0">
-        <div className="flex flex-wrap items-baseline gap-x-5 gap-y-2">
-          <span className="label" style={{ color: ACCENT }}>
-            03 — MBA
-          </span>
-          <span className="label text-bone-faint">{mbaMeta.period}</span>
-        </div>
-
-        <h2
-          id="mba-heading"
-          className="font-display mt-5 text-[clamp(1.9rem,4.2vw,3.4rem)] leading-[1.03] tracking-[-0.025em] text-bone"
-        >
-          MBA, Marketing
-          <span className="block text-bone-dim">
-            <span className="text-bone-faint italic">@ </span>
-            {mbaMeta.school}
-          </span>
-        </h2>
-
-        <div className="mt-7 grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-10">
-          <div className="lg:col-span-7">
-            <span className="label text-bone-faint">The Journey</span>
-            <p className="text-balance mt-3 max-w-2xl text-lg leading-[1.6] text-bone-dim sm:text-xl">
-              {mbaMeta.journey}
-            </p>
+      <div className="mx-auto flex min-h-[calc(100svh-var(--header-h))] w-full max-w-[1600px] flex-col px-5 pt-8 pb-10 sm:px-8 lg:px-12">
+        <header className="shrink-0">
+          <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+            <span className="label" style={{ color: A }}>
+              {mbaMeta.period}
+            </span>
+            <span className="label-sm text-bone-faint">Case study 02</span>
           </div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 16 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-5"
+          <h2
+            id="mba-heading"
+            className="font-display mt-3 text-[clamp(1.9rem,4vw,3.4rem)] leading-[1.02] tracking-[-0.025em] text-bone"
           >
+            {mbaMeta.degree}
+            <span className="text-bone-dim"> · {mbaMeta.school}</span>
+          </h2>
+
+          <div className="mt-6 grid grid-cols-1 items-start gap-x-12 gap-y-6 lg:grid-cols-12">
+            <p className="max-w-3xl text-[14.5px] leading-[1.65] text-bone-dim lg:col-span-8">
+              {mbaMeta.summary}
+            </p>
             <div
-              className="border-l pl-6"
-              style={{ borderColor: "color-mix(in oklab, var(--s3) 45%, transparent)" }}
+              className="border-l pl-5 lg:col-span-4"
+              style={{ borderColor: "color-mix(in oklab, var(--s3) 55%, transparent)" }}
             >
-              <span className="font-display block text-[clamp(2rem,3.6vw,3rem)] leading-none" style={{ color: ACCENT }}>
-                Top 1%
+              <span
+                className="font-display block text-[clamp(1.9rem,3.4vw,2.9rem)] leading-none"
+                style={{ color: A }}
+              >
+                {mbaMeta.standing}
               </span>
-              <span className="label mt-2 block text-bone-dim">
-                of the cohort academically
+              <span className="label-sm mt-2 block text-bone-dim">
+                {mbaMeta.standingNote}
               </span>
             </div>
-          </motion.div>
-        </div>
-      </motion.header>
+          </div>
+        </header>
 
-      {/* ── Body ───────────────────────────────────── */}
-      <div className="mt-14 grid grid-cols-1 gap-10 lg:mt-16 lg:grid-cols-12 lg:gap-12">
-        {/* What I learned */}
-        <div className="lg:col-span-5">
-          <span className="label text-bone-faint">What I Learned</span>
-          <dl className="mt-6 space-y-6">
-            {lessons.map((l, i) => (
-              <motion.div
-                key={l.index}
-                initial={{ opacity: 0, y: 14 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.4 }}
-                transition={{
-                  duration: 0.6,
-                  delay: i * 0.08,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-                className="grid grid-cols-[auto_1fr] gap-x-4"
+        <div className="mt-9 grid flex-1 grid-cols-1 gap-x-12 gap-y-9 lg:grid-cols-12">
+          {/* ── What the two years were made of ────── */}
+          <div className="lg:col-span-5">
+            <dl className="grid grid-cols-1 gap-x-8 gap-y-5 sm:grid-cols-2 lg:grid-cols-1">
+              {pillars.map((p) => (
+                <div key={p.index} className="border-t border-hair pt-3.5">
+                  <dt className="flex items-baseline gap-3">
+                    <span className="label-sm" style={{ color: A }}>
+                      {p.index}
+                    </span>
+                    <span className="font-display text-lg leading-tight text-bone">
+                      {p.title}
+                    </span>
+                  </dt>
+                  <dd className="mt-1.5 text-[12.5px] leading-relaxed text-bone-dim">
+                    {p.body}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+
+          {/* ── Proof of work ──────────────────────── */}
+          <div className="flex flex-col lg:col-span-7">
+            <div className="flex shrink-0 items-baseline justify-between gap-4">
+              <span className="label-sm text-bone-faint">Proof of work</span>
+              <span className="label-sm text-bone-faint">Click to read</span>
+            </div>
+            <div className="mt-4 grid flex-1 grid-cols-1 gap-6 sm:grid-cols-2">
+              <DocCard doc={thoucentric} accent={A} fill />
+              <DocCard doc={loreal} accent={A} fill />
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-9 shrink-0 border-t border-hair pt-6">
+          <p
+            className="max-w-4xl border-l pl-5 text-[14.5px] leading-[1.6] text-bone"
+            style={{ borderColor: "color-mix(in oklab, var(--s3) 55%, transparent)" }}
+          >
+            {mbaMeta.positioning}
+          </p>
+          <ul className="mt-6 flex flex-wrap gap-x-2 gap-y-2">
+            {mbaSkills.map((s) => (
+              <li
+                key={s}
+                className="label-sm border border-hair px-2.5 py-1 text-bone-dim"
               >
-                <dt className="label pt-1" style={{ color: ACCENT }}>
-                  {l.index}
-                </dt>
-                <dd>
-                  <span className="font-display block text-xl leading-tight text-bone">
-                    {l.title}
-                  </span>
-                  <span className="mt-1.5 block text-[13px] leading-relaxed text-bone-dim">
-                    {l.body}
-                  </span>
-                </dd>
-              </motion.div>
+                {s}
+              </li>
             ))}
-          </dl>
-        </div>
-
-        {/* Proof of work */}
-        <div className="lg:col-span-7">
-          <div className="flex items-baseline justify-between gap-4">
-            <span className="label text-bone-faint">Proof of Work</span>
-            <span className="label text-bone-faint">Click to read</span>
-          </div>
-
-          <div className="mt-6 grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-6">
-            <SingleDocCard doc={thoucentric} accent={ACCENT} />
-            <PageStack doc={loreal} accent={ACCENT} />
-          </div>
+          </ul>
         </div>
       </div>
     </section>

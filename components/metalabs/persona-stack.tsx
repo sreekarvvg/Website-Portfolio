@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
 import { PERSONA_COUNT, personaPages } from "@/lib/metalabs";
 
 const CYCLE_MS = 4200;
@@ -53,17 +52,9 @@ export function PersonaStack() {
           const i = (index + depth) % PERSONA_COUNT;
           const front = depth === 0;
           return (
-            <motion.div
+            <div
               key={depth}
               aria-hidden={!front}
-              initial={false}
-              animate={{
-                y: depth * -10,
-                x: depth * 14,
-                scale: 1 - depth * 0.035,
-                opacity: front ? 1 : 0.34 - depth * 0.07,
-              }}
-              transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
               style={{ zIndex: DEPTH - depth }}
               className="absolute inset-0 overflow-hidden rounded-sm border border-hair bg-white shadow-2xl shadow-black/60"
             >
@@ -79,7 +70,7 @@ export function PersonaStack() {
                 className="object-contain"
                 priority={depth === 0 && index === 0}
               />
-            </motion.div>
+            </div>
           );
         })}
 

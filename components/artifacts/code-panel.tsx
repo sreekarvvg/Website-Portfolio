@@ -2,8 +2,6 @@
 
 import { useEffect, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
-import { AnimatePresence, motion } from "framer-motion";
-import { X } from "lucide-react";
 
 /**
  * A code excerpt rendered as type rather than as a screenshot: it stays sharp
@@ -223,17 +221,10 @@ export function CodePanel({
       {/* Portalled to the body: the deck's horizontal transform would otherwise
           become the containing block for `fixed`, and the sticky viewport's
           overflow would clip the overlay. */}
-      {typeof document === "undefined"
-        ? null
-        : createPortal(
-      <AnimatePresence>
-        {expanded ? (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-[200] flex flex-col bg-ink/95 p-4 backdrop-blur-md sm:p-8"
+      {expanded && typeof document !== "undefined"
+        ? createPortal(
+            <div
+              className="fade-in fixed inset-0 z-[200] flex flex-col bg-ink/95 p-4 backdrop-blur-md sm:p-8"
             role="dialog"
             aria-modal="true"
             aria-label={`${file}, lines ${lines}`}
@@ -253,18 +244,17 @@ export function CodePanel({
                   aria-label="Close excerpt"
                   className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-hair text-bone-dim transition-colors hover:border-bone-dim hover:text-bone"
                 >
-                  <X size={15} strokeWidth={1.5} />
+                  <span aria-hidden>✕</span>
                 </button>
               </div>
               <div className="min-h-0 flex-1 overflow-auto p-4 sm:p-6">
                 <CodeBody code={code} startLine={startLine} size="lg" />
               </div>
             </div>
-          </motion.div>
-        ) : null}
-      </AnimatePresence>,
+            </div>,
             document.body,
-          )}
+          )
+        : null}
     </>
   );
 }

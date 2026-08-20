@@ -9,24 +9,31 @@ import type { ArtifactDoc } from "./artifacts";
  */
 
 export const intellectMeta = {
-  role: "AI Commercialization & Strategy",
-  org: "Intellect Design Arena",
+  period: "2026 — Present",
+  role: "AI Product · Strategy & Commercialization",
   unit: "CCO Office",
-  period: "2026–Present",
-  thesis:
-    "AI is not a product until someone can explain what it costs and what it is worth.",
-  summary:
-    "Partnered with Product, Sales, Pre-Sales, Delivery and senior leadership to structure enterprise opportunities exceeding USD 10M, translating customer requirements into commercially viable offerings, pricing strategies and scalable GTM approaches.",
+  org: "Intellect",
+  myRole:
+    "I work closely with Product, Sales, Pre-Sales, Delivery and senior leadership to shape opportunities for enterprise AI and BFSI products — from understanding customer requirements and building product propositions to designing pricing, ROI models and commercialization frameworks.",
+  problem:
+    "Enterprise AI was evolving faster than the way it was being priced, packaged and commercialized — making it difficult to consistently translate AI capabilities into clear customer value, ROI and commercial propositions.",
+  solution:
+    "I helped build a structured commercialization approach through the USHO framework — combining AI economics, pricing, licensing and value realization into a repeatable model. I also built 4 license calculators to simplify complex AI costing and make commercial decisions faster, clearer and more consistent.",
 } as const;
 
+export const intellectMetrics = [
+  { value: "$10M+", label: "Enterprise opportunities supported" },
+  { value: "Multiple", label: "RFPs, proposals & enterprise opportunities" },
+] as const;
+
 export const intellectSkills = [
+  "AI Product Strategy",
+  "Commercialization",
   "Pricing & Monetization",
-  "Commercial Strategy",
-  "Deal Structuring",
-  "Unit Economics",
-  "GTM Strategy",
-  "Enterprise AI",
-  "BFSI",
+  "ROI Modelling",
+  "RFP Strategy",
+  "Enterprise Solutions",
+  "Stakeholder Management",
 ] as const;
 
 /** The four models of the framework, as defined on deck slide 4. */

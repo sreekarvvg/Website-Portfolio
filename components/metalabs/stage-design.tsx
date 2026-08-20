@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
 import { conceptGallery, personaLed, visualDevelopment } from "@/lib/metalabs";
 import { ArtifactTile } from "./artifact-tile";
 import { Lightbox } from "./lightbox";
@@ -20,7 +19,7 @@ export function StageDesign() {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <div className="flex w-full flex-col px-6 pt-20 pb-28 sm:px-10 md:h-full md:pt-24 md:pb-24 lg:px-16">
+    <div className="flex flex-1 flex-col">
       <header className="shrink-0">
         <span className="label text-ml-accent">04 — Design the Product</span>
         <p className="mt-4 max-w-3xl text-balance text-base leading-[1.55] text-bone-dim sm:text-lg">
@@ -42,7 +41,7 @@ export function StageDesign() {
               <ArtifactTile
                 key={a.src}
                 artifact={a}
-                index={i}
+               
                 onOpen={() => setOpen(i)}
                 className={SLOTS[i] ?? "col-span-2 row-span-1"}
               />
@@ -51,7 +50,7 @@ export function StageDesign() {
         </div>
 
         {/* ── Persona-led design ───────────────────── */}
-        <div className="flex min-h-0 flex-col gap-6 overflow-auto lg:col-span-4">
+        <div className="flex flex-col gap-5 lg:col-span-4">
           <div>
             <span className="label text-bone-faint">Concept</span>
             <p className="mt-2 text-[13px] leading-relaxed text-bone-dim">
@@ -63,13 +62,9 @@ export function StageDesign() {
           <div className="border-t border-hair-faint pt-5">
             <span className="label text-bone-faint">Persona-led design</span>
             <dl className="mt-4 space-y-4">
-              {personaLed.map((p, i) => (
-                <motion.div
+              {personaLed.map((p) => (
+                <div
                   key={p.who}
-                  initial={{ opacity: 0, x: 10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.15 + i * 0.08 }}
                   className="border-l border-ml-accent/40 pl-4"
                 >
                   <dt className="font-display text-lg leading-tight text-bone">
@@ -78,7 +73,7 @@ export function StageDesign() {
                   <dd className="mt-1 text-[13px] leading-relaxed text-bone-dim">
                     {p.body}
                   </dd>
-                </motion.div>
+                </div>
               ))}
             </dl>
           </div>

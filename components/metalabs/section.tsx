@@ -2,6 +2,7 @@
 
 import { stages } from "@/lib/metalabs";
 import { StageDeck } from "@/components/artifacts/stage-deck";
+import { Film } from "./film";
 import { StageProduct } from "./stage-product";
 import { StageUnderstand } from "./stage-understand";
 import { StageDemand } from "./stage-demand";
@@ -13,11 +14,12 @@ export function MetaLabsSection() {
   return (
     <StageDeck
       id="metalabs"
-      eyebrow="Product Manager @ Meta Labs"
+      eyebrow="Product Manager · Metalabs Technology"
       accent="var(--s2)"
       stages={[...stages]}
+      backdrop={(stage) => <Film visible={stage === 0} />}
       panels={(goTo) => [
-        <StageProduct key="p" onExplore={() => goTo(1)} />,
+        <StageProduct key="p" />,
         <StageUnderstand key="u" />,
         <StageDemand key="d" />,
         <StageDesign key="g" />,

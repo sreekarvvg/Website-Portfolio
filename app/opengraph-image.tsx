@@ -1,5 +1,4 @@
 import { ImageResponse } from "next/og";
-import { milestones } from "@/lib/milestones";
 import { site } from "@/lib/site";
 
 /**
@@ -76,22 +75,19 @@ export default function OpengraphImage() {
               color: "#fb8f4a",
             }}
           >
-            {site.tagline}
+            {site.role}
           </div>
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", gap: 22 }}>
           {/* the five milestone hues, cold to warm */}
           <div style={{ display: "flex", gap: 8 }}>
-            {milestones.map((m) => (
+            {/* Literal hues: the card is rasterised outside the browser, so
+                CSS custom properties are not available here. */}
+            {["#3ddcae", "#f5c451", "#fb8f4a", "#fb6f8d", "#45c8f0"].map((c) => (
               <div
-                key={m.id}
-                style={{
-                  display: "flex",
-                  flex: 1,
-                  height: 5,
-                  background: m.hue,
-                }}
+                key={c}
+                style={{ display: "flex", flex: 1, height: 5, background: c }}
               />
             ))}
           </div>
@@ -106,8 +102,7 @@ export default function OpengraphImage() {
             }}
           >
             <div style={{ display: "flex" }}>
-              Intellect&nbsp;&nbsp;·&nbsp;&nbsp;Meta Labs&nbsp;&nbsp;·&nbsp;&nbsp;MAVIP&nbsp;&nbsp;·&nbsp;&nbsp;IMT
-              Ghaziabad&nbsp;&nbsp;·&nbsp;&nbsp;VJTI
+              Metalabs&nbsp;&nbsp;·&nbsp;&nbsp;IMT Ghaziabad&nbsp;&nbsp;·&nbsp;&nbsp;MAVIP&nbsp;&nbsp;·&nbsp;&nbsp;Intellect&nbsp;&nbsp;·&nbsp;&nbsp;VJTI
             </div>
           </div>
         </div>

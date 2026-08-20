@@ -1,12 +1,11 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { documentationTypes, documents, productLoop } from "@/lib/metalabs";
 import { DocumentSlot } from "./document-slot";
 
 export function StageBuild() {
   return (
-    <div className="flex w-full flex-col px-6 pt-20 pb-28 sm:px-10 md:h-full md:pt-24 md:pb-24 lg:px-16">
+    <div className="flex flex-1 flex-col">
       <header className="shrink-0">
         <span className="label text-ml-accent">05 — Build &amp; Iterate</span>
         <div className="mt-4 flex flex-wrap items-baseline gap-x-6 gap-y-2">
@@ -35,8 +34,8 @@ export function StageBuild() {
           </div>
 
           <div className="grid grid-cols-3 gap-4 sm:gap-5 md:min-h-0 md:flex-1 md:grid-rows-[minmax(0,1fr)]">
-            {documents.map((doc, i) => (
-              <DocumentSlot key={doc.id} doc={doc} index={i} />
+            {documents.map((doc) => (
+              <DocumentSlot key={doc.id} doc={doc} />
             ))}
           </div>
 
@@ -53,19 +52,15 @@ export function StageBuild() {
         </div>
 
         {/* ── Loop + principle ─────────────────────── */}
-        <div className="flex min-w-0 flex-col gap-6 md:min-h-0 md:overflow-auto lg:col-span-5">
+        <div className="flex min-w-0 flex-col gap-5 lg:col-span-5">
           <div>
             <span className="label text-bone-faint">
               Product management loop
             </span>
             <ol className="mt-4">
               {productLoop.map((step, i) => (
-                <motion.li
+                <li
                   key={step}
-                  initial={{ opacity: 0, x: 12 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.45, delay: i * 0.07 }}
                   className="grid grid-cols-[auto_1fr] items-start gap-x-3"
                 >
                   <span className="flex h-full flex-col items-center pt-1.5">
@@ -81,7 +76,7 @@ export function StageBuild() {
                   >
                     {step}
                   </span>
-                </motion.li>
+                </li>
               ))}
             </ol>
           </div>

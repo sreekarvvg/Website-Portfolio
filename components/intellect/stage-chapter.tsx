@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { motion } from "framer-motion";
 import { intellectDeck, type IntellectChapter } from "@/lib/intellect";
 import { DocumentReader } from "@/components/artifacts/document-reader";
 
@@ -19,7 +18,7 @@ export function StageChapter({ chapter }: { chapter: IntellectChapter }) {
   const [openAt, setOpenAt] = useState<number | null>(null);
 
   return (
-    <div className="flex w-full flex-col px-6 pt-20 pb-28 sm:px-10 md:h-full md:pt-24 md:pb-24 lg:px-16">
+    <div className="flex flex-1 flex-col">
       <header className="shrink-0">
         <span className="label" style={{ color: ACCENT }}>
           {chapter.index} — {chapter.label}
@@ -37,17 +36,9 @@ export function StageChapter({ chapter }: { chapter: IntellectChapter }) {
           </p>
 
           <dl className="mt-7 space-y-5">
-            {chapter.points.map((p, i) => (
-              <motion.div
+            {chapter.points.map((p) => (
+              <div
                 key={p.head}
-                initial={{ opacity: 0, x: -10 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{
-                  duration: 0.55,
-                  delay: 0.1 + i * 0.08,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
                 className="border-l border-hair pl-4"
               >
                 <dt className="label" style={{ color: ACCENT }}>
@@ -56,7 +47,7 @@ export function StageChapter({ chapter }: { chapter: IntellectChapter }) {
                 <dd className="mt-1.5 text-[13px] leading-relaxed text-bone-dim">
                   {p.body}
                 </dd>
-              </motion.div>
+              </div>
             ))}
           </dl>
         </div>
@@ -78,21 +69,13 @@ export function StageChapter({ chapter }: { chapter: IntellectChapter }) {
             }`}
           >
             {chapter.evidence.map((e, i) => (
-              <motion.button
+              <button
                 key={e.page}
                 type="button"
                 onClick={() => setOpenAt(e.page)}
                 data-cursor
                 data-cursor-label={`Slide ${e.page}`}
                 aria-label={`Open deck slide ${e.page}: ${e.caption}`}
-                initial={{ opacity: 0, y: 14 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{
-                  duration: 0.55,
-                  delay: i * 0.09,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
                 className={`group flex min-h-0 cursor-pointer flex-col overflow-hidden border border-hair bg-ink-raise/60 p-2 text-left transition-colors hover:border-[color-mix(in_oklab,var(--s5)_50%,transparent)] ${
                   chapter.evidence.length > 2 && i === 0 ? "col-span-2" : ""
                 }`}
@@ -114,7 +97,7 @@ export function StageChapter({ chapter }: { chapter: IntellectChapter }) {
                     {e.caption}
                   </span>
                 </span>
-              </motion.button>
+              </button>
             ))}
           </div>
         </div>

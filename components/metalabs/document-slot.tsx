@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { motion } from "framer-motion";
 import type { DocSpec } from "@/lib/metalabs";
 import { DocumentReader } from "@/components/artifacts/document-reader";
 
@@ -11,22 +10,12 @@ import { DocumentReader } from "@/components/artifacts/document-reader";
  * own reader instance, so the three documents on stage 05 never share a
  * viewer — and each remembers the page it was left on.
  */
-export function DocumentSlot({
-  doc,
-  index = 0,
-}: {
-  doc: DocSpec;
-  index?: number;
-}) {
+export function DocumentSlot({ doc }: { doc: DocSpec }) {
   const [open, setOpen] = useState(false);
 
   return (
     <>
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.55, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+      <div
         className="flex min-w-0 flex-col md:min-h-0"
       >
         <span className="label mb-2 block shrink-0 text-ml-accent">
@@ -68,7 +57,7 @@ export function DocumentSlot({
             Read →
           </span>
         </button>
-      </motion.div>
+      </div>
 
       <DocumentReader doc={doc} open={open} onClose={() => setOpen(false)} />
     </>

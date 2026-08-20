@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import { AnimatePresence, motion } from "framer-motion";
 /** Structural shape any paged artifact can satisfy, across sections. */
 export type ReaderDoc = {
   id: string;
@@ -41,7 +40,6 @@ export function DocumentReader({
   startPage?: number;
 }) {
   const [page, setPage] = useState(startPage ?? 1);
-  const [dir, setDir] = useState(1);
 
   // Adjusting state during render is React's recommended alternative to an
   // effect here.
@@ -53,13 +51,11 @@ export function DocumentReader({
   if (resetKey !== lastResetKey) {
     setLastResetKey(resetKey);
     setPage(startPage ?? 1);
-    setDir(1);
   }
 
   const turn = useCallback(
     (delta: number) => {
       if (!doc) return;
-      setDir(delta);
       setPage((p) => Math.max(1, Math.min(doc.pages, p + delta)));
     },
     [doc],
@@ -90,20 +86,16 @@ export function DocumentReader({
   if (typeof document === "undefined" || !doc) return null;
   const accent = doc.accent ?? "var(--ml-accent)";
 
+  if (!open) return null;
+
   return createPortal(
-    <AnimatePresence>
-      {open && (
-        <motion.div
-          role="dialog"
-          aria-modal="true"
-          aria-label={`${doc.title} — document reader`}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.25 }}
-          style={{ "--reader-accent": accent } as React.CSSProperties}
-          className="fixed inset-0 z-[200] flex flex-col bg-ink/96 backdrop-blur-xl"
-        >
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label={`${doc.title} — document reader`}
+      style={{ "--reader-accent": accent } as React.CSSProperties}
+      className="fade-in fixed inset-0 z-[200] flex flex-col bg-ink/96 backdrop-blur-xl"
+    >
           <div className="flex shrink-0 items-start justify-between gap-6 px-6 py-5 sm:px-10">
             <div>
               {doc.category && (
@@ -128,25 +120,16 @@ export function DocumentReader({
           </div>
 
           <div className="relative min-h-0 flex-1 overflow-hidden px-6 pb-4 sm:px-10">
-            <AnimatePresence mode="popLayout" initial={false}>
-              <motion.div
-                key={page}
-                initial={{ opacity: 0, x: dir * 40 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: dir * -40 }}
-                transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
-                className="relative h-full w-full"
-              >
-                <Image
-                  src={pageSrc(doc, page)}
-                  alt={`${doc.title}, page ${page} of ${doc.pages}`}
-                  fill
-                  sizes="100vw"
-                  className="object-contain"
-                  priority
-                />
-              </motion.div>
-            </AnimatePresence>
+            <div key={page} className="fade-in relative h-full w-full">
+              <Image
+                src={pageSrc(doc, page)}
+                alt={`${doc.title}, page ${page} of ${doc.pages}`}
+                fill
+                sizes="100vw"
+                className="object-contain"
+                priority
+              />
+            </div>
           </div>
 
           <div className="flex shrink-0 items-center justify-center gap-8 px-6 py-5 sm:px-10">
@@ -176,9 +159,7 @@ export function DocumentReader({
               →
             </button>
           </div>
-        </motion.div>
-      )}
-    </AnimatePresence>,
+    </div>,
     document.body,
   );
 }

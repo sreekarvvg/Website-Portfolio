@@ -9,11 +9,12 @@ export function IntellectSection() {
   return (
     <StageDeck
       id="intellect"
-      eyebrow="AI Commercialization @ Intellect"
+      eyebrow="AI Product · Strategy & Commercialization @ Intellect"
       accent="var(--s5)"
       stages={intellectStages}
-      panels={(goTo) => [
-        <StageIntro key="intro" onExplore={() => goTo(1)} />,
+      exploreLabel="Read the deck explained"
+      panels={() => [
+        <StageIntro key="intro" />,
         ...chapters.map((c) => <StageChapter key={c.id} chapter={c} />),
       ]}
     />

@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import {
   engAgents,
   engGoal,
@@ -15,7 +14,7 @@ const EDGE = "color-mix(in oklab, var(--s1) 45%, transparent)";
 /** Slide 1 — where the habit started, and what it has produced. */
 export function StageOverview({ onExplore }: { onExplore: () => void }) {
   return (
-    <div className="flex w-full flex-col px-6 pt-20 pb-28 sm:px-10 md:h-full md:pt-24 md:pb-24 lg:px-16">
+    <div className="flex flex-1 flex-col">
       <header className="shrink-0">
         <span className="label" style={{ color: ACCENT }}>
           01 — {engMeta.unit}
@@ -33,31 +32,23 @@ export function StageOverview({ onExplore }: { onExplore: () => void }) {
       <div className="mt-7 grid grid-cols-1 gap-10 md:min-h-0 md:flex-1 md:grid-rows-[minmax(0,1fr)] lg:grid-cols-12 lg:gap-12">
         {/* ── The habit ─────────────────────────────── */}
         <div className="flex min-w-0 flex-col md:min-h-0 lg:col-span-5">
-          <motion.blockquote
-            initial={{ opacity: 0, y: 14 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          <blockquote
             className="border-l pl-6"
             style={{ borderColor: EDGE }}
           >
             <p className="font-display text-balance text-[clamp(1.1rem,1.9vw,1.55rem)] leading-[1.3] text-bone italic">
               {engMeta.thesis}
             </p>
-          </motion.blockquote>
+          </blockquote>
 
           <div className="mt-6 space-y-4">
             {engMeta.paragraphs.map((p, i) => (
-              <motion.p
+              <p
                 key={i}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.12 + i * 0.08 }}
                 className="max-w-xl text-[13px] leading-relaxed text-bone-dim"
               >
                 {p}
-              </motion.p>
+              </p>
             ))}
           </div>
 
@@ -80,17 +71,9 @@ export function StageOverview({ onExplore }: { onExplore: () => void }) {
           <span className="label shrink-0 text-bone-faint">Selected work</span>
 
           <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
-            {engProjects.slice(0, 2).map((p, i) => (
-              <motion.article
+            {engProjects.slice(0, 2).map((p) => (
+              <article
                 key={p.id}
-                initial={{ opacity: 0, y: 14 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{
-                  duration: 0.55,
-                  delay: i * 0.08,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
                 className="border border-hair bg-ink-raise/60 p-3.5"
               >
                 <span className="label" style={{ color: ACCENT }}>
@@ -102,16 +85,12 @@ export function StageOverview({ onExplore }: { onExplore: () => void }) {
                 <p className="mt-2 text-[11px] leading-snug text-bone-dim">
                   {p.body}
                 </p>
-              </motion.article>
+              </article>
             ))}
           </div>
 
           {/* The current project, given the weight it deserves */}
-          <motion.article
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.65, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          <article
             className="mt-3 flex min-h-0 flex-col border bg-ink-raise/60 p-4 md:flex-1"
             style={{ borderColor: EDGE }}
           >
@@ -138,13 +117,9 @@ export function StageOverview({ onExplore }: { onExplore: () => void }) {
               A multi-agent research workflow
             </p>
             <dl className="mt-3 grid grid-cols-2 gap-x-4 gap-y-3 sm:grid-cols-3">
-              {engAgents.map((a, i) => (
-                <motion.div
+              {engAgents.map((a) => (
+                <div
                   key={a.name}
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.45, delay: 0.28 + i * 0.05 }}
                   className="border-l border-hair pl-2.5"
                 >
                   <dt className="text-[11px] leading-tight font-medium text-bone">
@@ -153,14 +128,14 @@ export function StageOverview({ onExplore }: { onExplore: () => void }) {
                   <dd className="mt-1 text-[10.5px] leading-snug text-bone-faint">
                     {a.body}
                   </dd>
-                </motion.div>
+                </div>
               ))}
             </dl>
 
             <p className="text-balance mt-auto max-w-2xl pt-4 text-[12px] leading-relaxed text-bone-dim italic">
               {engGoal}
             </p>
-          </motion.article>
+          </article>
 
           <button
             type="button"

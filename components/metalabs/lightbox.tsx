@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { useCallback, useEffect } from "react";
 import { createPortal } from "react-dom";
-import { AnimatePresence, motion } from "framer-motion";
 import type { Artifact } from "@/lib/metalabs";
 
 export function Lightbox({
@@ -51,18 +50,13 @@ export function Lightbox({
 
   if (typeof document === "undefined") return null;
   const item = index !== null ? items[index] : null;
+  if (!open || !item) return null;
 
   return createPortal(
-    <AnimatePresence>
-      {open && item && (
-        <motion.div
+        <div
           role="dialog"
           aria-modal="true"
           aria-label={item.caption}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.25 }}
           className="fixed inset-0 z-[200] flex flex-col bg-ink/95 backdrop-blur-xl"
           onClick={onClose}
         >
@@ -80,11 +74,8 @@ export function Lightbox({
             </button>
           </div>
 
-          <motion.div
+          <div
             key={item.src}
-            initial={{ opacity: 0, scale: 0.98 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
             className="relative min-h-0 flex-1 px-6 pb-4 sm:px-10"
             onClick={(e) => e.stopPropagation()}
           >
@@ -95,7 +86,7 @@ export function Lightbox({
               sizes="100vw"
               className="object-contain"
             />
-          </motion.div>
+          </div>
 
           <div
             className="flex shrink-0 items-center justify-between gap-4 px-6 py-5 sm:px-10"
@@ -119,9 +110,7 @@ export function Lightbox({
               Next →
             </button>
           </div>
-        </motion.div>
-      )}
-    </AnimatePresence>,
+        </div>,
     document.body,
   );
 }
