@@ -1,14 +1,12 @@
 import Image from "next/image";
 
 /**
- * Drop the real photograph at /public/portrait.jpg (portrait crop, ~1200×1500
- * or larger) and set PORTRAIT_SRC to "/portrait.jpg". Until then the frame
- * holds its own shape so the hero never reflows when the image lands.
- *
- * Deliberately static: the pointer-tracked parallax this replaced ran a spring
- * simulation on every mouse move for an effect nobody asked for.
+ * The photograph, cropped to the frame's own 4:5 so `object-cover` never has to
+ * guess where to cut. Deliberately static: the pointer-tracked parallax this
+ * replaced ran a spring simulation on every mouse move for an effect nobody
+ * asked for.
  */
-const PORTRAIT_SRC: string | null = null;
+const PORTRAIT_SRC: string | null = "/portrait.webp";
 
 export function Portrait() {
   return (
