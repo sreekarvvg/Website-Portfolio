@@ -7,11 +7,12 @@ import { Lightbox } from "./lightbox";
 
 /** Editorial layout: each artifact gets a deliberate slot, not a uniform grid. */
 // 7-column × 3-row grid; each row must total exactly 7 columns.
+/* Mosaic from md up only — see stage-design for why. */
 const SLOTS = [
-  "col-span-4 row-span-2", // poster — the anchor
-  "col-span-3 row-span-2", // key visual
-  "col-span-4 row-span-1", // comic strip
-  "col-span-3 row-span-1", // storyboards
+  "md:col-span-4 md:row-span-2", // poster — the anchor
+  "md:col-span-3 md:row-span-2", // key visual
+  "md:col-span-4 md:row-span-1", // comic strip
+  "md:col-span-3 md:row-span-1", // storyboards
 ];
 
 export function StageDemand() {
@@ -68,17 +69,19 @@ export function StageDemand() {
             <span className="label text-bone-faint">
               Campaign wall — real work shipped
             </span>
-            <span className="label text-bone-faint">Click to enlarge</span>
+            <span className="label hidden text-bone-faint md:inline">
+              Click to enlarge
+            </span>
           </div>
 
-          <div className="grid aspect-[4/3] grid-cols-7 grid-rows-3 gap-3 md:aspect-auto md:h-[calc(100%-2rem)]">
+          <div className="grid auto-rows-[8rem] grid-cols-2 gap-2.5 md:aspect-auto md:auto-rows-auto md:grid-cols-7 md:grid-rows-3 md:gap-3 md:h-[calc(100%-2rem)]">
             {campaignWall.map((a, i) => (
               <ArtifactTile
                 key={a.src}
                 artifact={a}
                
                 onOpen={() => setOpen(i)}
-                className={SLOTS[i] ?? "col-span-3 row-span-1"}
+                className={SLOTS[i] ?? "md:col-span-3 md:row-span-1"}
               />
             ))}
           </div>

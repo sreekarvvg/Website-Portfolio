@@ -28,14 +28,14 @@ export function DocumentSlot({ doc }: { doc: DocSpec }) {
           data-cursor
           data-cursor-label="Read"
           aria-label={`Open ${doc.title} — ${doc.pages} page document reader`}
-          className="group relative aspect-[3/4] w-full cursor-pointer overflow-hidden rounded-sm border border-hair bg-white shadow-xl shadow-black/60 transition-transform duration-500 hover:-translate-y-1.5 md:aspect-auto md:min-h-0 md:flex-1"
+          className="group relative aspect-[4/3] w-full cursor-pointer overflow-hidden rounded-sm border border-hair bg-white shadow-xl shadow-black/60 transition-transform duration-500 hover:-translate-y-1.5 md:aspect-auto md:min-h-0 md:flex-1"
         >
           <Image
             src={`${doc.dir}/p01.webp`}
             alt=""
             fill
             sizes="(max-width: 768px) 45vw, 18vw"
-            className="object-contain object-top"
+            className="object-cover object-top md:object-contain"
           />
 
           {/* page-edge suggestion — reads as a physical document */}
@@ -44,7 +44,7 @@ export function DocumentSlot({ doc }: { doc: DocSpec }) {
             className="pointer-events-none absolute inset-y-0 right-0 w-1.5 bg-gradient-to-l from-black/25 to-transparent"
           />
 
-          <span className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink via-ink/85 to-transparent p-3 pt-10 text-left">
+          <span className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink via-ink/92 to-transparent p-3 pt-14 md:via-ink/85 md:pt-10 text-left">
             <span className="block truncate font-display text-sm leading-tight text-bone">
               {doc.title}
             </span>

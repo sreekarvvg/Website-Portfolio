@@ -114,7 +114,7 @@ export function StageOverview() {
             <p className="label-sm mt-3 shrink-0 text-bone-faint">
               A multi-agent research workflow
             </p>
-            <dl className="mt-2.5 grid grid-cols-2 gap-x-4 gap-y-2.5 sm:grid-cols-3">
+            <dl className="mt-2.5 grid grid-cols-1 gap-x-4 gap-y-2.5 min-[420px]:grid-cols-2 sm:grid-cols-3">
               {engAgents.map((a) => (
                 <div
                   key={a.name}

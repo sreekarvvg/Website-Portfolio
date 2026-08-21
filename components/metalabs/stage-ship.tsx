@@ -34,7 +34,7 @@ export function StageShip({ onRestart }: { onRestart: () => void }) {
             </p>
           </div>
 
-          <div className="mt-4 grid aspect-[3/1] grid-cols-3 gap-3 md:aspect-auto md:min-h-0 md:flex-1">
+          <div className="mt-4 grid auto-rows-[9rem] grid-cols-2 gap-2.5 md:aspect-auto md:auto-rows-auto md:grid-cols-3 md:gap-3 md:min-h-0 md:flex-1">
             {collection.map((a, i) => (
               <button
                 key={a.src}

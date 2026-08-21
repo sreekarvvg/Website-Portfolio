@@ -28,12 +28,12 @@ export function StageBuild() {
         <div className="flex min-w-0 flex-col md:min-h-0 lg:col-span-7">
           <div className="mb-4 flex shrink-0 items-baseline justify-between gap-4">
             <span className="label text-bone-faint">Product documentation</span>
-            <span className="label text-bone-faint">
+            <span className="label hidden text-bone-faint md:inline">
               Click any document to read
             </span>
           </div>
 
-          <div className="grid grid-cols-3 gap-4 sm:gap-5 md:min-h-0 md:flex-1 md:grid-rows-[minmax(0,1fr)]">
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-3 md:min-h-0 md:flex-1 md:grid-rows-[minmax(0,1fr)]">
             {documents.map((doc) => (
               <DocumentSlot key={doc.id} doc={doc} />
             ))}

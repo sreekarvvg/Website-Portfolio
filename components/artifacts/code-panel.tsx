@@ -200,10 +200,19 @@ export function CodePanel({
             aria-hidden
             className="pointer-events-none absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-ink-raise to-transparent"
           />
+          {/* Long lines run past a phone's width; fade the edge so the
+              horizontal scroll reads as intended rather than as a cut. */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-ink-raise to-transparent md:hidden"
+          />
         </div>
 
         <div className="flex shrink-0 items-center justify-between gap-3 border-t border-hair px-3 py-2">
-          <span className="label text-bone-faint">Verbatim excerpt</span>
+          <span className="label text-bone-faint">
+            <span className="md:hidden">Swipe to read →</span>
+            <span className="hidden md:inline">Verbatim excerpt</span>
+          </span>
           <button
             type="button"
             onClick={() => setExpanded(true)}

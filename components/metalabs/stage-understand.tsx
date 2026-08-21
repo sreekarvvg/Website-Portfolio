@@ -10,7 +10,7 @@ export function StageUnderstand() {
 
   return (
     <div className="flex flex-1 flex-col">
-      <header className="flex shrink-0 flex-wrap items-end justify-between gap-x-10 gap-y-4">
+      <header className="flex shrink-0 flex-col items-start gap-4 md:flex-row md:flex-wrap md:items-end md:justify-between md:gap-x-10">
         <div>
           <span className="label text-ml-accent">02 — Understand</span>
           <p className="mt-3 max-w-2xl text-[14px] leading-[1.55] text-bone-dim">
@@ -18,7 +18,7 @@ export function StageUnderstand() {
             their behaviour and the competitive landscape.
           </p>
         </div>
-        <dl className="flex shrink-0 gap-x-10">
+        <dl className="flex shrink-0 gap-x-10 md:gap-x-10">
           {understandMetrics.map((m) => (
             <div key={m.label}>
               <dt className="sr-only">{m.label}</dt>
@@ -71,7 +71,50 @@ export function StageUnderstand() {
               Similarweb figures, Apr–Jun 2022.
             </p>
 
-            <div className="min-w-0">
+            {/* Phones: one card per competitor. A seven-column table on a
+                390px screen gives each column about 50px, which is how the
+                headers ended up sitting on top of one another. */}
+            <ul className="flex flex-col gap-3 md:hidden">
+              {competitors.map((c) => (
+                <li
+                  key={c.name}
+                  className="border border-hair bg-ink-raise/50 px-3 py-2.5"
+                >
+                  <p className="font-display text-[15px] leading-tight text-bone">
+                    {c.name}
+                  </p>
+                  <p className="mt-1 text-[11px] leading-snug text-bone-faint">
+                    {c.read}
+                  </p>
+                  <p className="label-sm mt-2 text-bone-dim">
+                    {[c.genre, c.chain]
+                      .filter((v) => v && v !== "—" && v !== "Not recorded")
+                      .join(" · ") || "Genre and chain not recorded"}
+                  </p>
+                  <dl className="mt-2.5 grid grid-cols-2 gap-x-4 gap-y-2 border-t border-hair-faint pt-2.5">
+                    {[
+                      { k: "Visits/mo", v: c.visits },
+                      { k: "Uniques", v: c.uniques },
+                      { k: "Duration", v: c.duration, accent: true },
+                      { k: "Bounce", v: c.bounce },
+                    ].map((m) => (
+                      <div key={m.k} className="min-w-0">
+                        <dt className="label-sm text-bone-faint">{m.k}</dt>
+                        <dd
+                          className={`mt-0.5 font-mono text-[12px] ${
+                            m.accent ? "text-ml-accent" : "text-bone"
+                          }`}
+                        >
+                          {m.v}
+                        </dd>
+                      </div>
+                    ))}
+                  </dl>
+                </li>
+              ))}
+            </ul>
+
+            <div className="hidden min-w-0 md:block">
               <table className="w-full table-fixed border-collapse text-left">
                 <thead>
                   <tr className="border-b border-hair">

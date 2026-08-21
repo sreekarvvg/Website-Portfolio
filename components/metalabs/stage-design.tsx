@@ -7,12 +7,15 @@ import { Lightbox } from "./lightbox";
 
 /** Hero concept large, supporting development frames layered around it. */
 // 6-column × 3-row grid; rows 1–2 are shared with the hero, row 3 is a pair.
+/* The mosaic only exists from md up; below that every tile is one cell of a
+   two-column grid, because a six-column mosaic on a 390px screen gives each
+   artwork about 60px. */
 const SLOTS = [
-  "col-span-4 row-span-2", // hero environment
-  "col-span-2 row-span-1",
-  "col-span-2 row-span-1",
-  "col-span-3 row-span-1",
-  "col-span-3 row-span-1",
+  "md:col-span-4 md:row-span-2", // hero environment
+  "md:col-span-2 md:row-span-1",
+  "md:col-span-2 md:row-span-1",
+  "md:col-span-3 md:row-span-1",
+  "md:col-span-3 md:row-span-1",
 ];
 
 export function StageDesign() {
@@ -34,16 +37,18 @@ export function StageDesign() {
         <div className="min-h-0 lg:col-span-8">
           <div className="mb-3 flex items-baseline justify-between">
             <span className="label text-bone-faint">Visual development</span>
-            <span className="label text-bone-faint">Click to enlarge</span>
+            <span className="label hidden text-bone-faint md:inline">
+              Click to enlarge
+            </span>
           </div>
-          <div className="grid aspect-[4/3] grid-cols-6 grid-rows-3 gap-3 md:aspect-auto md:h-[calc(100%-2rem)]">
+          <div className="grid auto-rows-[7.5rem] grid-cols-2 gap-2.5 md:aspect-auto md:auto-rows-auto md:grid-cols-6 md:grid-rows-3 md:gap-3 md:h-[calc(100%-2rem)]">
             {conceptGallery.map((a, i) => (
               <ArtifactTile
                 key={a.src}
                 artifact={a}
                
                 onOpen={() => setOpen(i)}
-                className={SLOTS[i] ?? "col-span-2 row-span-1"}
+                className={SLOTS[i] ?? "md:col-span-2 md:row-span-1"}
               />
             ))}
           </div>

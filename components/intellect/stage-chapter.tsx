@@ -56,7 +56,7 @@ export function StageChapter({ chapter }: { chapter: IntellectChapter }) {
         <div className="flex min-w-0 flex-col md:min-h-0 lg:col-span-7">
           <div className="mb-3 flex shrink-0 items-baseline justify-between gap-4">
             <span className="label text-bone-faint">From the deck</span>
-            <span className="label-sm text-bone-faint">
+            <span className="label-sm hidden text-bone-faint md:inline">
               Click any slide to open the deck
             </span>
           </div>
@@ -66,8 +66,8 @@ export function StageChapter({ chapter }: { chapter: IntellectChapter }) {
           <div
             className={`grid min-h-0 flex-1 gap-4 ${
               chapter.evidence.length > 2
-                ? "grid-cols-2 grid-rows-[1.15fr_1fr]"
-                : "grid-cols-1 grid-rows-2"
+                ? "grid-cols-1 auto-rows-[11rem] md:auto-rows-auto md:grid-cols-2 md:grid-rows-[1.15fr_1fr]"
+                : "grid-cols-1 auto-rows-[11rem] md:auto-rows-auto md:grid-rows-2"
             }`}
           >
             {chapter.evidence.map((e, i) => (
@@ -79,7 +79,7 @@ export function StageChapter({ chapter }: { chapter: IntellectChapter }) {
                 data-cursor-label={`Slide ${e.page}`}
                 aria-label={`Open deck slide ${e.page}: ${e.caption}`}
                 className={`group flex min-h-0 cursor-pointer flex-col overflow-hidden border border-hair bg-ink-raise/60 p-2 text-left transition-colors hover:border-[color-mix(in_oklab,var(--s5)_50%,transparent)] ${
-                  chapter.evidence.length > 2 && i === 0 ? "col-span-2" : ""
+                  chapter.evidence.length > 2 && i === 0 ? "md:col-span-2" : ""
                 }`}
               >
                 <span className="relative w-full min-h-0 flex-1">

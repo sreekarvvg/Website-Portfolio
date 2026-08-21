@@ -36,7 +36,9 @@ export function ArtifactTile({
         />
       </span>
       <span className="flex shrink-0 items-baseline gap-2 border-t border-hair-faint px-2.5 py-1.5 text-left">
-        <span className="label shrink-0 text-ml-accent">{artifact.kind}</span>
+        <span className="label hidden shrink-0 text-ml-accent md:inline">
+          {artifact.kind}
+        </span>
         <span className="min-w-0 flex-1 truncate text-[11px] leading-snug text-bone-dim">
           {artifact.caption}
         </span>
