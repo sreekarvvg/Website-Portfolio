@@ -10,7 +10,7 @@ export type Milestone = {
   index: string;
   role: string;
   org: string;
-  /** Short form for the timeline, where a column is ~90px wide. */
+  /** What the step was, as shown on the timeline. */
   short: string;
   /** The year the step starts — the timeline's tick label. */
   year: string;
@@ -24,7 +24,7 @@ export const milestones: Milestone[] = [
     index: "01",
     role: "B.Tech · AI Lab",
     org: "VJTI, Mumbai",
-    short: "VJTI",
+    short: "Engineering (VJTI, Mumbai)",
     year: "2018",
     period: "2018 — 2022",
     hue: "var(--s1)",
@@ -34,7 +34,7 @@ export const milestones: Milestone[] = [
     index: "02",
     role: "Product Manager",
     org: "Metalabs Technology",
-    short: "Metalabs",
+    short: "Product Manager",
     year: "2022",
     period: "2022 — 2024",
     hue: "var(--s2)",
@@ -44,7 +44,7 @@ export const milestones: Milestone[] = [
     index: "03",
     role: "MBA",
     org: "IMT Ghaziabad",
-    short: "IMT",
+    short: "MBA @ IMT G",
     year: "2024",
     period: "2024 — 2026",
     hue: "var(--s3)",
@@ -54,7 +54,7 @@ export const milestones: Milestone[] = [
     index: "04",
     role: "Strategy & Product Management Intern",
     org: "MAVIP Group",
-    short: "MAVIP",
+    short: "Product & Strategy Manager",
     year: "2025",
     period: "2025",
     hue: "var(--s4)",
@@ -64,7 +64,7 @@ export const milestones: Milestone[] = [
     index: "05",
     role: "AI Product · Strategy & Commercialization",
     org: "Intellect",
-    short: "Intellect",
+    short: "CCO Office @ Intellect Design",
     year: "2026",
     period: "2026 — Present",
     hue: "var(--s5)",
