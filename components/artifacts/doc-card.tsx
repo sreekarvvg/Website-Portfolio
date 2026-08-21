@@ -22,7 +22,10 @@ export function DocCard({
 }: {
   doc: ArtifactDoc;
   accent: string;
-  /** grow to fill the parent; only works where the parent has a real height */
+  /** Grow to fill the parent from lg up, where the two-column layout gives
+   *  this card a real height to fill. Below that the column stacks and has no
+   *  height to divide, so the card holds `aspect` instead — without it the
+   *  media box collapsed to 2px on phones. */
   fill?: boolean;
   /** aspect of the media box when not filling — slides want a wide one */
   aspect?: string;
@@ -33,7 +36,11 @@ export function DocCard({
   const src = `${doc.dir}/p${String(page).padStart(2, "0")}.webp`;
 
   return (
-    <div className={`group flex min-w-0 flex-col ${fill ? "min-h-0 flex-1" : ""}`}>
+    <div
+      className={`group flex min-w-0 flex-col ${
+        fill ? "lg:min-h-0 lg:flex-1" : ""
+      }`}
+    >
       <div className="mb-2 flex shrink-0 items-baseline justify-between gap-3">
         <span className="label-sm truncate" style={{ color: accent }}>
           {doc.org}
@@ -48,7 +55,7 @@ export function DocCard({
         onClick={() => setOpen(true)}
         aria-label={`Open ${doc.org} — ${doc.title}, ${doc.pages} page reader`}
         className={`relative w-full cursor-pointer overflow-hidden rounded-sm border border-hair bg-white transition-colors group-hover:border-[color-mix(in_oklab,var(--card-accent)_60%,transparent)] ${
-          fill ? "min-h-0 flex-1" : aspect
+          fill ? `${aspect} lg:aspect-auto lg:min-h-0 lg:flex-1` : aspect
         }`}
         style={{ "--card-accent": accent } as React.CSSProperties}
       >

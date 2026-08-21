@@ -73,9 +73,11 @@ export function MbaSection() {
             <div className="flex shrink-0 items-baseline justify-between gap-4">
               <span className="label-sm text-bone-faint">Proof of work</span>
             </div>
-            <div className="mt-4 grid flex-1 grid-cols-1 gap-6 sm:grid-cols-2">
-              <DocCard doc={thoucentric} accent={A} fill />
-              <DocCard doc={loreal} accent={A} fill />
+            <div className="mt-4 grid flex-1 grid-cols-1 gap-6 lg:grid-cols-2">
+              {/* A4 portrait source — a 3:4 box lets the page fill it on phones. */}
+              <DocCard doc={thoucentric} accent={A} aspect="aspect-[3/4]" fill />
+              {/* 16:9 slides. */}
+              <DocCard doc={loreal} accent={A} aspect="aspect-[16/9]" fill />
             </div>
           </div>
         </div>

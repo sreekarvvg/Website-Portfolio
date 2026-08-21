@@ -104,7 +104,7 @@ export function StageIntro() {
             <span className="label-sm text-bone-faint">The deck</span>
           </div>
           <div className="mt-4 flex flex-1 flex-col">
-            <DocCard doc={intellectDeck} accent={A} fill />
+            <DocCard doc={intellectDeck} accent={A} aspect="aspect-[16/9]" fill />
           </div>
         </div>
       </div>
